@@ -94,7 +94,7 @@ export function ContactsSection() {
       subtitle="Tap a card to open your mail app, phone dialer, or website. Use the copy button to save details."
     >
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45 }}
         className="space-y-6"

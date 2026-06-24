@@ -45,10 +45,9 @@ export function SkillsSection() {
                   key={item.name}
                   onClick={() => setSelected(item)}
                   className="card-glass skill-card min-h-11 gap-2 p-4"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: '-30px' }}
-                  transition={{ delay: groupIndex * 0.05 + index * 0.04 }}
+                  initial={false}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: groupIndex * 0.05 + index * 0.04, duration: 0.35 }}
                 >
                   <span className="font-semibold text-[var(--text)]">{item.name}</span>
                   <StarRating rating={item.rating} />

@@ -10,7 +10,7 @@ export function InfoSection() {
       <GradientFallback />
       <SectionWrapper id="info" title="" subtitle="">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="card-glass hero-card w-full p-4 sm:p-6 md:p-10"

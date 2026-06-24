@@ -67,10 +67,9 @@ export function JourneySection() {
                   key={`${year}-${event.title}-${index}`}
                   onClick={() => setSelected(event)}
                   className={`card-glass journey-card ${cardClass[event.category]}`}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ delay: groupIndex * 0.03 + index * 0.04 }}
+                  initial={false}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: groupIndex * 0.03 + index * 0.04, duration: 0.35 }}
                 >
                   <span className={`journey-badge ${badgeClass[event.category]}`}>
                     <span className="journey-badge-swatch" aria-hidden="true" />

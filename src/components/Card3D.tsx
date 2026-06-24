@@ -3,7 +3,7 @@ import { motion, type HTMLMotionProps } from 'framer-motion'
 
 type MotionExtras = Pick<
   HTMLMotionProps<'div'>,
-  'initial' | 'whileInView' | 'viewport' | 'transition'
+  'initial' | 'animate' | 'transition'
 >
 
 interface Card3DProps extends MotionExtras {
@@ -32,9 +32,8 @@ export function Card3D({
   onClick,
   className = '',
   as = 'button',
-  initial,
-  whileInView,
-  viewport,
+  initial = false,
+  animate = { opacity: 1 },
   transition,
 }: Card3DProps) {
   const innerRef = useRef<HTMLDivElement>(null)
@@ -67,8 +66,7 @@ export function Card3D({
     onMouseMove: canTilt ? onMouseMove : undefined,
     onMouseLeave: canTilt ? resetTilt : undefined,
     initial,
-    whileInView,
-    viewport,
+    animate,
     transition,
   }
 

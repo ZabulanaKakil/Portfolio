@@ -23,10 +23,9 @@ export function AchievementsSection() {
             key={item.title}
             as="article"
             className="card-glass flex flex-col overflow-hidden"
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ delay: index * 0.08 }}
+            initial={false}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.08, duration: 0.35 }}
           >
             <div className="flex h-32 items-center justify-center bg-gradient-to-br from-[var(--surface-elevated)] to-transparent">
               <Award size={40} className="text-google-yellow/70" />
