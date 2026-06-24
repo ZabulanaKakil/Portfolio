@@ -23,8 +23,21 @@
 
 ## Current state
 
-**Last commit:** `f447168` — Fix content disappearing on GitHub Pages (whileInView → mount animate)
-**Branch:** `main` (ahead of origin — push pending)
+**Last commit:** (pending) — Fix GitHub Pages serving source instead of Vite build; consolidate profile asset
+**Branch:** `main`
+
+### GitHub Pages deploy (critical)
+
+Live site was broken because **Pages source was set to “Deploy from a branch” → `main` / root**, which serves raw `index.html` (`/src/main.tsx`) instead of the Vite build (`/Porfolio/assets/*.js`). Built assets 404’d; profile image and app never loaded.
+
+**Fix (one-time, repo Settings → Pages → Build and deployment):**
+
+| Option | Source setting |
+|--------|----------------|
+| **Preferred** | **GitHub Actions** (uses `.github/workflows/static.yml` artifact) |
+| **Fallback** | Deploy from branch → **`gh-pages`** → **`/ (root)`** (workflow pushes `dist/` after each build) |
+
+Do **not** use `main` / root — that bypasses the build.
 
 ### Tech stack (as implemented)
 
@@ -61,7 +74,7 @@
 | [`src/sections/*.tsx`](src/sections/) | One file per section |
 | [`src/components/Navigation.tsx`](src/components/Navigation.tsx) | Desktop + mobile nav |
 | [`src/index.css`](src/index.css) | Theme variables, card-3d, journey/skills grids |
-| [`public/profile.png`](public/profile.png) | Profile photo for OG/static (bundled via `src/assets/profile.png`) |
+| [`public/profile.png`](public/profile.png) | Profile photo for OG/static; bundled via `src/assets/profile.png` import in InfoSection |
 | [`src/assets/ss/`](src/assets/ss/) | 34 reference screenshots from old site (WhatsApp JPEGs) |
 | [`vite.config.ts`](vite.config.ts) | `base: '/Porfolio/'` |
 | [`.github/workflows/static.yml`](.github/workflows/static.yml) | CI build + Pages deploy |
@@ -180,6 +193,16 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 - **Root cause:** Framer Motion `whileInView` + `initial={{ opacity: 0 }}` on sections/cards. On GitHub Pages, IntersectionObserver + sticky chrome causes elements to leave viewport after load; animations reverse and content stays invisible (flash visible ~1s then empty shells).
 - **Fix:** Replace `whileInView` with `initial={false}` + `animate={{ opacity: 1 }}` in Info, Journey, Skills, Achievements, Contacts, and default in `Card3D.tsx`.
 - **Files:** All section components + `Card3D.tsx`
+
+---
+
+### 2026-06-24 — Fix live site: branch deploy serving source, profile asset cleanup
+
+- **Root cause (live 404 / broken image / blank app):** GitHub Pages was configured to deploy **`main` branch root**, not the Vite `dist/` output. Live HTML referenced `/src/main.tsx`; `/Porfolio/assets/*` returned 404. Profile hash URL never existed on the server.
+- **Root cause (duplicate assets):** `profilepic.png` vs `profile.png` — consolidated to single `src/assets/profile.png` (same bytes as former `profilepic.png`); removed untracked duplicate copies at repo root and `public/profilepic.png`.
+- **Fix:** Updated `.github/workflows/static.yml` — verify profile PNG in dist, deploy via GitHub Actions Pages **and** push `dist/` to `gh-pages` branch; added `public/.nojekyll`.
+- **User action required:** Repo **Settings → Pages → Source** → **GitHub Actions** (or branch **`gh-pages`** / root). Not `main`/root.
+- Build verified: `npm run lint` + `npm run build` → `dist/assets/profile-BgyXCgPl.png`
 
 ---
 

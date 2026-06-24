@@ -1,7 +1,7 @@
 import { portfolio, personalSpecs } from '../data/portfolio'
 import { SectionWrapper } from '../components/SectionWrapper'
 import { GradientFallback } from '../components/GradientFallback'
-import profileImg from '../assets/profilepic.png'
+import profileImg from '../assets/profile.png'
 
 export function InfoSection() {
   return (
