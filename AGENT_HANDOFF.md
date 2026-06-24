@@ -24,8 +24,8 @@
 ## Current state
 
 **Last updated:** 2026-06-24  
-**Last commit:** `277d4e1` — Replace Three.js background with CSS 3D card tilt and UI polish  
-**Branch:** `main` (synced with `origin/main`)
+**Last commit:** (see session log — multi-theme & layout fixes)  
+**Branch:** `main`
 
 ### Tech stack (as implemented)
 
@@ -41,12 +41,13 @@
 2. **Journey** — “Through the ages” timeline 1998–2025, color-coded Life / Education / Achievement / Job, tap for detail modals
 3. **Skills** — Categorized skills with star ratings + detail modals
 4. **Achievements** — GOC Coin, 97 Inf Bde, Commando/Weapons courses, Operation Utoron
-5. **Contacts** — Email, WhatsApp, phones, social links, CV download; copy buttons per row
+5. **Contacts** — Two-column contact cards, copy buttons, CV download
 
 ### Design
 
-- Google-inspired accent colors (blue, red, yellow, green)
+- Google-inspired accent colors (blue, red, yellow, green) — **4 color themes** (Google, Army, Tech, YouTube) × light/dark
 - Light / dark mode (`localStorage` + `prefers-color-scheme`, no flash — script in `index.html`)
+- Theme picker in nav (`ThemeToggle`) — palette + day/night mode
 - Desktop: sticky top nav | Mobile: bottom tab bar (5 items), safe-area insets
 
 ---
@@ -112,9 +113,14 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 - Fixed TS build errors (`Card3D` Framer types, Lucide brand icons)
 - Commit: `277d4e1` — pushed to `main`
 
-### 2026-06-24 — Agent handoff doc
+### 2026-06-24 — Multi-theme system, Journey fixes & full-width layout
 
-- Created this file (`AGENT_HANDOFF.md`) for future agent sessions
+- Fixed Journey timeline: year headers, category badges on separate lines, theme-aware colors, full-width grid
+- Fixed `Card3D` flex layout (className now on inner element so card content stacks correctly)
+- Full-width section layouts: removed `border-l-4` narrow column feel from `SectionWrapper`
+- Contacts redesigned: 2-column card grid (1 col mobile), 44px+ tap targets
+- Added 4 color themes (Google, Army, Tech, YouTube) × light/dark; `portfolio-color-theme` in localStorage
+- Expanded `ThemeToggle` to palette + mode picker; no-flash script applies system default on first visit
 
 ---
 

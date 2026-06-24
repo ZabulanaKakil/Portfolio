@@ -17,7 +17,7 @@ export function AchievementsSection() {
       title="Rewards & achievements"
       subtitle="Recognition earned through service, courses, and operational excellence."
     >
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="achievements-grid">
         {portfolio.achievements.map((item, index) => (
           <Card3D
             key={item.title}

@@ -63,7 +63,7 @@ export function Card3D({
   }
 
   const sharedProps = {
-    className: `card-3d ${className}`,
+    className: 'card-3d',
     onMouseMove: canTilt ? onMouseMove : undefined,
     onMouseLeave: canTilt ? resetTilt : undefined,
     initial,
@@ -72,7 +72,11 @@ export function Card3D({
     transition,
   }
 
-  const inner = <div ref={innerRef} className="card-3d-inner">{children}</div>
+  const inner = (
+    <div ref={innerRef} className={`card-3d-inner ${className}`}>
+      {children}
+    </div>
+  )
 
   if (as === 'article') {
     return <motion.article {...sharedProps}>{inner}</motion.article>

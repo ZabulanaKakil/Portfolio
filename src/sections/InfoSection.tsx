@@ -13,7 +13,7 @@ export function InfoSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="card-glass hero-card max-w-4xl p-6 md:p-10"
+          className="card-glass hero-card w-full p-6 md:p-10"
         >
           <div className="flex flex-col gap-8 md:flex-row md:items-start">
             <img

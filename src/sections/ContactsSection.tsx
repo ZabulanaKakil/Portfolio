@@ -93,68 +93,70 @@ export function ContactsSection() {
     <SectionWrapper
       id="contacts"
       title="Where to find me"
-      subtitle="Tap a link to open your mail app, phone dialer, or website. Use the copy button to save details."
+      subtitle="Tap a card to open your mail app, phone dialer, or website. Use the copy button to save details."
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="card-glass hero-card max-w-xl p-6 md:p-8"
+        className="section-content space-y-6"
       >
-        <div className="mb-6 flex items-center gap-2 text-[var(--text-muted)]">
-          <MapPin size={18} className="shrink-0 text-google-green" />
-          <span>{portfolio.contacts.location}</span>
+        <div className="card-glass hero-card flex w-full items-center gap-2 p-4 md:p-5">
+          <MapPin size={20} className="shrink-0 text-google-green" />
+          <span className="text-[var(--text-muted)]">{portfolio.contacts.location}</span>
         </div>
 
         {copied && (
-          <p className="mb-4 rounded-lg bg-google-green/15 px-3 py-2 text-sm text-google-green">
+          <p className="rounded-lg bg-google-green/15 px-3 py-2 text-sm text-google-green">
             Copied {copied} to clipboard
           </p>
         )}
 
-        <ul className="space-y-1">
+        <div className="contacts-grid">
           {portfolio.contacts.links.map(({ label, href, copyValue, external }) => {
             const Icon = iconMap[label] ?? ExternalLink
             const isExternal = external ?? href.startsWith('http')
             return (
-              <li key={label}>
-                <div className="flex min-h-11 items-center gap-2 rounded-lg px-2 py-1 transition-colors hover:bg-[var(--surface-elevated)]">
+              <article key={label} className="card-glass contact-card">
+                <div className="flex items-start gap-2">
                   <a
                     href={href}
                     target={isExternal ? '_blank' : undefined}
                     rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="flex min-h-11 min-w-0 flex-1 items-center gap-3 rounded-lg px-1 py-2"
+                    className="contact-card-link min-w-0 flex-1"
                   >
-                    <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--surface-elevated)] ${colorMap[label] ?? 'text-[var(--text)]'}`}>
-                      <Icon size={18} />
+                    <span
+                      className={`contact-icon-wrap ${colorMap[label] ?? 'text-[var(--text)]'}`}
+                    >
+                      <Icon size={20} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block font-medium text-[var(--text)]">{label}</span>
+                      <span className="block font-semibold text-[var(--text)]">{label}</span>
                       <span className="block truncate text-sm text-[var(--text-muted)]">{copyValue}</span>
                     </span>
                     {isExternal && (
-                      <ExternalLink size={14} className="shrink-0 text-[var(--text-muted)]" aria-hidden="true" />
+                      <ExternalLink size={16} className="shrink-0 text-[var(--text-muted)]" aria-hidden="true" />
                     )}
                   </a>
                   <button
                     type="button"
                     onClick={() => void copyToClipboard(copyValue, label)}
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-elevated)] hover:text-[var(--text)]"
+                    className="contact-copy-btn"
                     aria-label={`Copy ${label}`}
                   >
-                    <Copy size={16} />
+                    <Copy size={18} />
                   </button>
                 </div>
-              </li>
+              </article>
             )
           })}
-        </ul>
+        </div>
 
         <a
           href={portfolio.contacts.cvUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 flex min-h-11 items-center justify-center gap-2 rounded-xl bg-google-blue px-4 py-3 font-semibold text-white shadow-lg shadow-google-blue/25 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-google-blue px-4 py-3 font-semibold text-white shadow-lg shadow-google-blue/25 transition-transform hover:scale-[1.02] active:scale-[0.98]"
         >
           <Download size={18} />
           Download CV (PDF)
