@@ -1,9 +1,37 @@
-import { portfolio, personalSpecs } from '../data/portfolio'
+import { useState } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import { portfolio, personalSpecs, type BioHighlight, type BioParagraph } from '../data/portfolio'
+
+const bioHighlightClass: Record<BioHighlight, string> = {
+  role: 'bio-highlight--role',
+  service: 'bio-highlight--service',
+  tech: 'bio-highlight--tech',
+  value: 'bio-highlight--value',
+  skill: 'bio-highlight--skill',
+}
 import { SectionWrapper } from '../components/SectionWrapper'
 import { GradientFallback } from '../components/GradientFallback'
 import profileImg from '../assets/profile.png'
 
+function BioText({ spans, className }: { spans: BioParagraph; className?: string }) {
+  return (
+    <p className={className}>
+      {spans.map((span, index) =>
+        span.highlight ? (
+          <span key={`${span.text}-${index}`} className={bioHighlightClass[span.highlight]}>
+            {span.text}
+          </span>
+        ) : (
+          <span key={`${span.text}-${index}`}>{span.text}</span>
+        ),
+      )}
+    </p>
+  )
+}
+
 export function InfoSection() {
+  const [bioExpanded, setBioExpanded] = useState(false)
+
   return (
     <>
       <GradientFallback />
@@ -22,20 +50,49 @@ export function InfoSection() {
               <h1 className="text-[clamp(1.75rem,5vw,3rem)] font-bold leading-tight text-theme">
                 {portfolio.name}
               </h1>
-              <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-google-blue">
-                {portfolio.title}
-              </p>
+              <hr className="hero-name-divider" aria-hidden="true" />
+              <p className="hero-title-badge">{portfolio.title}</p>
               <p className="mt-3 text-[clamp(1rem,2.5vw,1.25rem)] font-medium leading-snug text-theme-muted">
                 {portfolio.tagline}
               </p>
             </div>
           </div>
 
-          <div className="mt-8 space-y-4 text-theme-muted">
-            <p className="text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed">
-              {portfolio.bio}
-            </p>
-            <p className="text-sm leading-relaxed">{portfolio.cvSummary}</p>
+          <div className="hero-bio mt-8">
+            <p className="hero-bio__salutation">{portfolio.salutation}</p>
+            <BioText
+              spans={portfolio.bioIntro}
+              className="hero-bio__paragraph text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed text-theme-muted"
+            />
+            {bioExpanded && (
+              <div className="hero-bio__expanded space-y-4">
+                <BioText
+                  spans={portfolio.bioTechnical}
+                  className="hero-bio__paragraph text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed text-theme-muted"
+                />
+                <br></br>
+                <BioText
+                  spans={portfolio.bioClosing}
+                  className="hero-bio__paragraph text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed text-theme-muted"
+                />
+              </div>
+            )}
+
+            <div className="hero-bio__toggle-wrap">
+              <button
+                type="button"
+                className="hero-bio-toggle"
+                onClick={() => setBioExpanded((expanded) => !expanded)}
+                aria-expanded={bioExpanded}
+                aria-label={bioExpanded ? 'Hide full bio' : 'Show full bio'}
+              >
+                {bioExpanded ? (
+                  <ChevronUp aria-hidden="true" size={22} strokeWidth={2.25} />
+                ) : (
+                  <ChevronDown aria-hidden="true" size={22} strokeWidth={2.25} />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="mt-8 overflow-x-auto rounded-xl border border-[var(--border)]">

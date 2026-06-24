@@ -65,6 +65,20 @@ export function SkillsSection() {
           <>
             <StarRating rating={selected.rating} />
             <p className="mt-4">{selected.detail}</p>
+            {selected.tools && selected.tools.length > 0 && (
+              <div className="mt-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+                  Tools & technologies
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {selected.tools.map((tool) => (
+                    <span key={tool} className="skill-chip text-xs">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         )}
       </DetailModal>

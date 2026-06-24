@@ -18,6 +18,7 @@ export interface SkillItem {
   name: string
   rating: number
   detail: string
+  tools?: string[]
 }
 
 export interface SkillCategory {
@@ -47,6 +48,15 @@ export interface ContactLink {
   numbers?: ContactPhoneEntry[]
 }
 
+export type BioHighlight = 'role' | 'service' | 'tech' | 'value' | 'skill'
+
+export type BioSpan = {
+  readonly text: string
+  readonly highlight?: BioHighlight
+}
+
+export type BioParagraph = readonly BioSpan[]
+
 export const journeyCategoryLabels: Record<JourneyCategory, string> = {
   life: 'Life',
   education: 'Education',
@@ -58,8 +68,102 @@ export const portfolio = {
   name: 'Tanvir Nahian Swapnil',
   title: 'Former Army Officer',
   tagline: 'Security & ICT Operations Specialist — leadership forged in service, innovation shared in peace.',
-  bio: `I am a former Army Officer from the Corps of Signals, now channeling my operational precision and leadership into ICT, web development, and user interface design. My background instills a strong sense of discipline, accountability, and strategic thinking, while my civilian journey has sharpened my creativity, problem-solving, and user-centric mindset. I specialize in building systems that are both secure and visually engaging, with a focus on clean architecture and intuitive design.`,
-  cvSummary: `Security & ICT Operations Specialist with over 8 years of leadership in the Bangladesh Army, managing and safeguarding personnel, infrastructure, and data in high-pressure environments. Demonstrated expertise in cybersecurity, strategic operations planning, communications systems, and team management.`,
+  salutation: 'Assalamu Alaikum',
+  bioIntro: [
+    { text: 'I am Tanvir Nahian Swapnil — a ' },
+    { text: 'commissioned officer', highlight: 'role' },
+    { text: ' of the ' },
+    { text: 'Bangladesh Army', highlight: 'role' },
+    { text: ', retired with honor from the ' },
+    { text: 'Corps of Signals', highlight: 'role' },
+    { text: ', and a graduate engineer in ' },
+    { text: 'Computer Science', highlight: 'tech' },
+    { text: '. My service from ' },
+    { text: '2020 to 2025', highlight: 'service' },
+    {
+      text: ' was defined by unwavering dedication to national duty, encompassing critical operations such as ',
+    },
+    { text: 'electoral security', highlight: 'service' },
+    { text: ', ' },
+    { text: 'counter-instability missions', highlight: 'service' },
+    { text: ' in the hill tracts, ' },
+    { text: 'humanitarian coordination', highlight: 'service' },
+    { text: ' during the ' },
+    { text: 'FDMN crisis', highlight: 'service' },
+    { text: ', and response to the ' },
+    { text: 'July Carnage', highlight: 'service' },
+    {
+      text: '. These experiences forged in me a discipline that transcends uniform — a mindset of ',
+    },
+    { text: 'precision', highlight: 'value' },
+    { text: ', ' },
+    { text: 'resilience', highlight: 'value' },
+    { text: ', and ' },
+    { text: 'strategic clarity', highlight: 'value' },
+    { text: '.' },
+  ] satisfies BioParagraph,
+  bioTechnical: [
+    {
+      text: 'Parallel to my military obligations, I cultivated a deep proficiency in the ',
+    },
+    { text: 'digital domain', highlight: 'tech' },
+    { text: '. From ' },
+    { text: 'cybersecurity', highlight: 'tech' },
+    { text: ' and ' },
+    { text: 'web architecture', highlight: 'tech' },
+    { text: ' to ' },
+    { text: 'multimedia design', highlight: 'tech' },
+    { text: ' and ' },
+    { text: 'strategic presentation', highlight: 'tech' },
+    {
+      text: ', I pursued knowledge relentlessly — often in the quiet hours between deployments. My technical journey is not merely a skillset; it is an extension of my ethos: to ',
+    },
+    { text: 'adapt', highlight: 'value' },
+    { text: ', to ' },
+    { text: 'learn', highlight: 'value' },
+    { text: ', and to ' },
+    { text: 'lead with integrity', highlight: 'value' },
+    {
+      text: ". Curiosity remains my compass, guiding me to approach every challenge with a learner's spirit and a ",
+    },
+    { text: "tactician's eye", highlight: 'value' },
+    { text: '.' },
+  ] satisfies BioParagraph,
+  bioClosing: [
+    { text: 'Today, I channel my ' },
+    { text: 'operational precision', highlight: 'value' },
+    { text: ' and ' },
+    { text: 'leadership', highlight: 'value' },
+    { text: ' into ' },
+    { text: 'ICT', highlight: 'tech' },
+    { text: ', ' },
+    { text: 'web development', highlight: 'tech' },
+    { text: ', and ' },
+    { text: 'user interface design', highlight: 'tech' },
+    {
+      text: '. I specialize in building systems that are both ',
+    },
+    { text: 'secure', highlight: 'tech' },
+    {
+      text: ' and visually engaging, with a focus on ',
+    },
+    { text: 'clean architecture', highlight: 'tech' },
+    { text: ' and ' },
+    { text: 'intuitive design', highlight: 'tech' },
+    { text: '. As a ' },
+    { text: 'Security & ICT Operations Specialist', highlight: 'skill' },
+    { text: ' with over ' },
+    { text: 'eight years of leadership experience', highlight: 'value' },
+    {
+      text: ', I have managed and safeguarded personnel, infrastructure, and data in high-pressure environments. My portfolio reflects this journey — each branch a testament to the ',
+    },
+    { text: 'life', highlight: 'value' },
+    { text: " I've lived, the " },
+    { text: 'skills', highlight: 'skill' },
+    { text: " I've honed, and the " },
+    { text: 'values', highlight: 'value' },
+    { text: ' I carry forward.' },
+  ] satisfies BioParagraph,
   quote: {
     text: 'All that is gold does not glitter, Not all those who wander are lost; The old that is strong does not wither, Deep roots are not reached by the frost.',
     author: 'J.R.R. Tolkien',
@@ -71,13 +175,14 @@ export const portfolio = {
     height: "5'8\"",
     weight: '62 kg',
     maritalStatus: 'Single',
+    educationalBackground: 'Science',
     parents: {
       father: 'Md. Abu Sufian',
       mother: 'Tahmina Akter',
     },
     birthPlace: 'P.G. Hospital, Dhaka',
     nameOrigin:
-      'Tanvir from Tahmina, Nahian from Sufian, and Swapnil chosen by my grandfather with my mother\'s agreement.',
+      'Tanvir from Tahmina, Nahian from Sufian, and Swapnil chosen by my grandfather with my mother\'s agreement. My paternal grandfather used to call me Billu.',
     hobbies: ['Web Development', 'Web Surfing', 'Freelancing'],
   },
   education: [
@@ -113,10 +218,12 @@ export const portfolio = {
   skillHighlights: [
     'Cybersecurity & Cyber Auditing',
     'ICT Network Infrastructure',
+    'Surveillance Systems (CCTV)',
     'Strategic Operations Planning',
     'Leadership (70–500 personnel)',
     'Microsoft Office Suite',
-    'Web Development',
+    'Basic Coding (Java, C++, Web Stack)',
+    'Web Development & Online Portals',
   ],
   skillCategories: [
     {
@@ -127,24 +234,28 @@ export const portfolio = {
           rating: 4.0,
           detail:
             'I build responsive, secure websites and online portals with clean architecture and intuitive user experience, combining my military discipline with modern web technologies.',
+          tools: ['PHP', 'HTML', 'CSS', 'JavaScript', 'AJAX', 'MySQL'],
         },
         {
           name: 'App Developer',
           rating: 3.0,
           detail:
             'I can create mobile and desktop applications tailored to user needs with a focus on performance and usability. I created applications with Java during my training at BMA but over the years I have focused more on web development. However, I can restart and relearn quickly since I had the exposure.',
+          tools: ['Flutter', 'React Native', 'Android Studio'],
         },
         {
           name: 'Web Security Auditor',
           rating: 3.7,
           detail:
             'Having completed the Cyber Security Course, I have in-depth knowledge of website security and auditing. I perform security audits to identify vulnerabilities and ensure compliance with best practices. During test sessions in Jessore, I conducted a live audit and security check at an Artillery Unit in the Cantonment and identified several vulnerabilities.',
+          tools: ['Nmap', 'Wireshark', 'Metasploit'],
         },
         {
           name: 'Network Planner',
           rating: 4.0,
           detail:
             'I design and implement secure ICT networks for field communication, drawing on my Corps of Signals background and hands-on experience deploying networks in operational environments.',
+          tools: ['Cisco', 'MikroTik', 'Ubiquiti'],
         },
       ],
     },
@@ -191,6 +302,7 @@ export const portfolio = {
           rating: 4.2,
           detail:
             'I create contingency plans for emergency security operations in critical environments. I deliberately planned a hostage rescue exercise on my own accord, showing troops how to rescue hostages in an under-construction building while terrorists were ordered to fire and flee on sight. One of four terrorists escaped, revealing weaknesses that would matter in a real mission — realism is how I treat my career.',
+          tools: ['Risk Assessment', 'Rapid Deployment', 'Coordination with Agencies'],
         },
       ],
     },
@@ -202,12 +314,14 @@ export const portfolio = {
           rating: 4.3,
           detail:
             'I served as adjutant for most of my military career — the most active administrative appointment in a unit. This taught me troops\' psychology and their way of doing tasks. I always found the right person for any task, or personally guided them to ensure smooth results while keeping resources organized to complete administrative work with minimal intervention from authorities.',
+          tools: ['Scheduling', 'Resource Allocation', 'Reporting'],
         },
         {
           name: 'Resource Planner',
           rating: 4.0,
           detail:
             'I plan and allocate resources effectively to meet organizational goals. As an administrator I have always checked, restocked, and organized my resources. Future assumptions with multiple contingencies have kept me prepared for dire needs.',
+          tools: ['Budget Management', 'Manpower Allocation', 'Timeline Optimization'],
         },
       ],
     },
@@ -270,11 +384,30 @@ export const portfolio = {
       category: 'life',
       title: 'Birth',
       detail:
-        '14 September 1998 — born at P.G. Hospital, Dhaka. My father Md. Abu Sufian and mother Tahmina Akter welcomed me surrounded by relatives. My name blends both parents\' names: Tanvir from Tahmina, Nahian from Sufian, and Swapnil chosen by my grandfather.',
+        '14 September 1998 — born at P.G. Hospital, Dhaka. Many came to see my first glance. My father Md. Abu Sufian and mother Tahmina Akter welcomed me surrounded by relatives. My name blends both parents\' names: Tanvir from Tahmina, Nahian from Sufian, and Swapnil chosen by my grandfather. My paternal grandfather used to call me Billu.',
+    },
+    {
+      year: '2006',
+      category: 'education',
+      title: 'Joined Ideal Primary School',
+      detail:
+        'Joined Ideal Primary School in class 2 directly, skipping class 1 after being taught those subjects at home. Initially roll 55 — second last in class — but quickly rose in academic ranking.',
     },
     { year: '2004', category: 'education', title: 'Elementary School' },
     { year: '2006', category: 'education', title: 'Primary School' },
     { year: '2009', category: 'education', title: 'Graduation from Primary School' },
+    {
+      year: '2010',
+      category: 'achievement',
+      title: "President's Scout Award",
+      detail: 'Received the President\'s Scout Award for exemplary service and leadership, opening doors to national-level scouting events.',
+    },
+    {
+      year: '2010',
+      category: 'achievement',
+      title: 'Inter-School Debate Championship',
+      detail: 'Won the inter-school debate championship — my first taste of public speaking success.',
+    },
     { year: '2016', category: 'achievement', title: 'Higher Secondary Certificate', detail: 'GPA 5.00' },
     { year: '2016', category: 'education', title: 'Graduated from College' },
     { year: '2016', category: 'achievement', title: 'ISSB Selection' },
@@ -322,7 +455,7 @@ export const portfolio = {
       category: 'job',
       title: 'Hill Tracts Deployment',
       detail:
-        'Commanded 70 personnel during Operation Utoron in Bandarban, Chittagong Hill Tracts. Served as cybersecurity advisor during sensitive operations and led operational activities in Cox\'s Bazar and hilly regions.',
+        'Commanded 70 personnel during Operation Utoron in Bandarban, Chittagong Hill Tracts. Served as cybersecurity advisor during sensitive operations, led activities in Cox\'s Bazar and hilly regions, and participated in tactical planning against Kuki-Chin National Army threats.',
     },
     { year: '2025', category: 'job', title: 'Back to 7 Signal Battalion' },
     { year: '2025', category: 'achievement', title: 'Recognition for PowerPoint Design' },
@@ -335,6 +468,7 @@ export const portfolio = {
       category: 'Honor',
       description:
         'Awarded for outstanding service in the Chittagong Hill Tracts under 24 Infantry Division.',
+      image: 'achievement-images/goc-coin.jpg',
     },
     {
       title: 'Serving with 97 Infantry Brigade',
@@ -342,6 +476,7 @@ export const portfolio = {
       category: 'Service',
       description:
         'A token memento for serving in the Chittagong Hill Tracts with HQ 97 Infantry Brigade — Southern Shield.',
+      image: 'achievement-images/97-inf-bde.jpg',
     },
     {
       title: 'Basic Commando Course 73',
@@ -349,6 +484,7 @@ export const portfolio = {
       category: 'Military Course',
       description:
         'Successfully completed Basic Commando Course 73 under the School of Infantry and Tactics, Bangladesh Army. BA-10481 Captain Tanvir Nahian Swapnil.',
+      image: 'achievement-images/commando-course-73.jpg',
     },
     {
       title: "Officers' Weapons Course 107",
@@ -356,6 +492,7 @@ export const portfolio = {
       category: 'Military Course',
       description:
         "Successfully completed Officers' Weapons Course 107 under the School of Infantry and Tactics, Bangladesh Army. BA-10481 Captain Tanvir Nahian Swapnil.",
+      image: 'achievement-images/weapons-course-107.jpg',
     },
     {
       title: 'Operation Utoron — Bandarban',
@@ -436,12 +573,12 @@ export const portfolio = {
 
 export const personalSpecs: PersonalSpec[] = [
   { label: 'Full Name', value: portfolio.name },
-  { label: 'Service ID', value: portfolio.personal.serviceId },
   { label: 'Date of Birth', value: portfolio.personal.dob },
   { label: 'Location', value: portfolio.personal.location },
   { label: 'Height', value: portfolio.personal.height },
   { label: 'Weight', value: portfolio.personal.weight },
   { label: 'Marital Status', value: portfolio.personal.maritalStatus },
+  { label: 'Educational Background', value: portfolio.personal.educationalBackground },
   {
     label: 'Education',
     value: 'SSC GPA 5.00 · HSC GPA 5.00 · BSc CSE CGPA 3.39',

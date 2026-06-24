@@ -43,24 +43,24 @@ export function SectionWrapper({ id, title, subtitle, legend, children }: Sectio
   return (
     <section id={id} className="section-anchor mx-auto w-full min-w-0 max-w-6xl px-4 py-8 sm:px-5 sm:py-10 md:px-6 md:py-20">
       {(title || subtitle || legend) && (
-        <header className="section-header-sticky mb-6 md:mb-10">
+        <header className="section-header-sticky mb-4 md:mb-10">
           <div className={`section-header-panel bg-gradient-to-r ${accent.glow} to-transparent`}>
             {title && (
-              <div className="flex flex-col items-center gap-2">
-                <span className={`h-1 w-10 shrink-0 rounded-full ${accent.bar}`} aria-hidden="true" />
+              <div className="section-header-title-wrap flex flex-col items-center gap-1 md:gap-2">
+                <span className={`section-header-accent h-0.5 w-8 shrink-0 rounded-full md:h-1 md:w-10 ${accent.bar}`} aria-hidden="true" />
                 <h2
-                  className={`min-w-0 text-center text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-tight text-[var(--text)] ${accent.accent}`}
+                  className={`section-header-title min-w-0 text-center font-bold tracking-tight text-[var(--text)] ${accent.accent}`}
                 >
                   {title}
                 </h2>
               </div>
             )}
             {subtitle && (
-              <p className="mt-2 max-w-none text-center text-[clamp(0.9rem,2.5vw,1.05rem)] leading-relaxed text-[var(--text-muted)]">
+              <p className="section-header-subtitle mt-1 max-w-none text-center text-[var(--text-muted)] md:mt-2">
                 {subtitle}
               </p>
             )}
-            {legend && <div className="mt-4">{legend}</div>}
+            {legend && <div className="section-header-legend mt-2 md:mt-4">{legend}</div>}
           </div>
         </header>
       )}
