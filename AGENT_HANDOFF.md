@@ -23,8 +23,8 @@
 
 ## Current state
 
-**Last commit:** `feebee05` — Mobile UX, themes, journey timeline, and profile photo
-**Branch:** `main` (synced with `origin/main`)
+**Last commit:** `f447168` — Fix content disappearing on GitHub Pages (whileInView → mount animate)
+**Branch:** `main` (ahead of origin — push pending)
 
 ### Tech stack (as implemented)
 
@@ -172,6 +172,14 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 - **Fix:** Option C — centered surface pill: `color: var(--text)` on `background: var(--surface-elevated)` with `border: 2px solid var(--accent-primary)`; `.journey-year-header` flex column centered; full-width divider below.
 - **Files:** `src/index.css` (layout + contrast); `JourneySection.tsx` unchanged (markup already correct)
 - Build verified: `npm run build` passes
+
+---
+
+### 2026-06-24 — Fix GitHub Pages content disappearing
+
+- **Root cause:** Framer Motion `whileInView` + `initial={{ opacity: 0 }}` on sections/cards. On GitHub Pages, IntersectionObserver + sticky chrome causes elements to leave viewport after load; animations reverse and content stays invisible (flash visible ~1s then empty shells).
+- **Fix:** Replace `whileInView` with `initial={false}` + `animate={{ opacity: 1 }}` in Info, Journey, Skills, Achievements, Contacts, and default in `Card3D.tsx`.
+- **Files:** All section components + `Card3D.tsx`
 
 ---
 
