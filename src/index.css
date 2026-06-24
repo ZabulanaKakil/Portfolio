@@ -102,24 +102,26 @@ body {
   background: var(--surface);
 }
 
-.journey-scroll {
+.journey-grid {
   display: grid;
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
 }
 
 @media (max-width: 767px) {
-  .journey-scroll {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 1rem;
-    padding-bottom: 0.5rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+  .journey-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .journey-scroll > * {
-    flex: 0 0 min(85vw, 320px);
-    scroll-snap-align: start;
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -9,8 +9,9 @@ const GOOGLE_COLORS = ['#4285F4', '#EA4335', '#FBBC05', '#34A853']
 const sectionColorIndex: Record<SectionId, number> = {
   info: 0,
   journey: 3,
-  achievements: 2,
-  contacts: 1,
+  skills: 2,
+  achievements: 1,
+  contacts: 0,
 }
 
 interface ShapeProps {

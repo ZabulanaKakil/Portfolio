@@ -5,17 +5,17 @@ import { SectionWrapper } from '../components/SectionWrapper'
 
 const categoryColors: Record<string, string> = {
   Honor: 'text-google-red bg-google-red/15',
-  Leadership: 'text-google-blue bg-google-blue/15',
-  Innovation: 'text-google-yellow bg-google-yellow/15',
-  Community: 'text-google-green bg-google-green/15',
+  Service: 'text-google-blue bg-google-blue/15',
+  'Military Course': 'text-google-green bg-google-green/15',
+  Operations: 'text-google-yellow bg-google-yellow/15',
 }
 
 export function AchievementsSection() {
   return (
     <SectionWrapper
       id="achievements"
-      title="Achievements"
-      subtitle="Recognition earned through service, leadership, and commitment to excellence."
+      title="Rewards & achievements"
+      subtitle="Recognition earned through service, courses, and operational excellence."
     >
       <div className="grid gap-5 sm:grid-cols-2">
         {portfolio.achievements.map((item, index) => (
@@ -24,24 +24,26 @@ export function AchievementsSection() {
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ delay: index * 0.1 }}
-            className="card-glass flex flex-col p-6"
+            transition={{ delay: index * 0.08 }}
+            className="card-glass flex flex-col overflow-hidden"
           >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-google-yellow/15 text-google-yellow">
-                <Award size={20} />
-              </div>
-              <span
-                className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryColors[item.category] ?? 'bg-[var(--surface-elevated)] text-[var(--text-muted)]'}`}
-              >
-                {item.category}
-              </span>
+            <div className="flex h-32 items-center justify-center bg-[var(--surface-elevated)]">
+              <Award size={40} className="text-google-yellow/60" />
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-[var(--text)]">{item.title}</h3>
-            <time className="mt-1 text-sm text-[var(--text-muted)]">{item.date}</time>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--text-muted)]">
-              {item.description}
-            </p>
+            <div className="flex flex-1 flex-col p-6">
+              <div className="flex items-start justify-between gap-3">
+                <span
+                  className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryColors[item.category] ?? 'bg-[var(--surface-elevated)] text-[var(--text-muted)]'}`}
+                >
+                  {item.category}
+                </span>
+              </div>
+              <h3 className="mt-3 text-lg font-semibold text-[var(--text)]">{item.title}</h3>
+              <time className="mt-1 text-sm text-[var(--text-muted)]">{item.date}</time>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--text-muted)]">
+                {item.description}
+              </p>
+            </div>
           </motion.article>
         ))}
       </div>

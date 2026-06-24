@@ -8,6 +8,7 @@ import { usePageVisibility } from '../hooks/useMedia'
 const sectionCamera: Record<SectionId, [number, number, number]> = {
   info: [0, 0, 8],
   journey: [1.5, 0.5, 8],
+  skills: [-0.5, 1, 7.8],
   achievements: [-1, 1, 7.5],
   contacts: [0, -0.5, 8.5],
 }

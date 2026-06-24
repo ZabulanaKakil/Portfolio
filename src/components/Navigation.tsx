@@ -11,7 +11,7 @@ export function DesktopNav({ activeSection }: NavigationProps) {
     <header className="fixed top-0 right-0 left-0 z-50 hidden border-b border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-md md:block">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <span className="text-sm font-semibold tracking-wide text-[var(--text)]">
-          Capt Nahian
+          Tanvir Nahian
         </span>
         <ul className="flex items-center gap-1">
           {sections.map(({ id, label }) => (
@@ -53,7 +53,7 @@ export function MobileNav({ activeSection }: NavigationProps) {
                 type="button"
                 onClick={() => scrollToSection(id)}
                 aria-current={activeSection === id ? 'page' : undefined}
-                className={`flex min-h-11 w-full flex-col items-center justify-center gap-0.5 px-2 py-2 text-xs font-medium transition-colors ${
+                className={`flex min-h-11 w-full flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] font-medium transition-colors sm:text-xs ${
                   activeSection === id
                     ? 'text-google-blue'
                     : 'text-[var(--text-muted)]'

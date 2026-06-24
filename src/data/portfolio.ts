@@ -1,104 +1,445 @@
+export type JourneyCategory = 'life' | 'education' | 'achievement' | 'job'
+
+export type SectionId = 'info' | 'journey' | 'skills' | 'achievements' | 'contacts'
+
+export interface PersonalSpec {
+  label: string
+  value: string
+}
+
+export interface JourneyEvent {
+  year: string
+  category: JourneyCategory
+  title: string
+  detail?: string
+}
+
+export interface SkillItem {
+  name: string
+  rating: number
+  detail: string
+}
+
+export interface SkillCategory {
+  category: string
+  items: SkillItem[]
+}
+
+export interface Achievement {
+  title: string
+  date: string
+  category: string
+  description: string
+  image?: string
+}
+
+export interface ContactLink {
+  label: string
+  href: string
+  copyValue: string
+  external?: boolean
+}
+
+export const journeyCategoryLabels: Record<JourneyCategory, string> = {
+  life: 'Life',
+  education: 'Education',
+  achievement: 'Achievement',
+  job: 'Job',
+}
+
 export const portfolio = {
-  name: 'Capt Nahian (retd)',
-  tagline: 'Leadership forged in service, wisdom shared in peace.',
-  bio: `A retired Captain with decades of distinguished military service, Capt Nahian brings strategic leadership, operational excellence, and a steadfast commitment to mentorship. From commanding units in challenging theaters to advising on defense policy, his career reflects discipline, integrity, and dedication to those who serve.`,
-  skills: [
-    'Strategic Leadership',
-    'Operational Planning',
-    'Crisis Management',
-    'Team Building',
-    'Defense Policy',
-    'Training & Mentorship',
-    'Logistics',
-    'Cross-functional Coordination',
+  name: 'Tanvir Nahian Swapnil',
+  title: 'Former Army Officer',
+  tagline: 'Security & ICT Operations Specialist — leadership forged in service, innovation shared in peace.',
+  bio: `I am a former Army Officer from the Corps of Signals, now channeling my operational precision and leadership into ICT, web development, and user interface design. My background instills a strong sense of discipline, accountability, and strategic thinking, while my civilian journey has sharpened my creativity, problem-solving, and user-centric mindset. I specialize in building systems that are both secure and visually engaging, with a focus on clean architecture and intuitive design.`,
+  cvSummary: `Security & ICT Operations Specialist with over 8 years of leadership in the Bangladesh Army, managing and safeguarding personnel, infrastructure, and data in high-pressure environments. Demonstrated expertise in cybersecurity, strategic operations planning, communications systems, and team management.`,
+  quote: {
+    text: 'All that is gold does not glitter, Not all those who wander are lost; The old that is strong does not wither, Deep roots are not reached by the frost.',
+    author: 'J.R.R. Tolkien',
+  },
+  personal: {
+    serviceId: 'BA-10481',
+    dob: '14 Sep 1998',
+    location: 'Dhaka, Bangladesh',
+    height: "5'8\"",
+    weight: '62 kg',
+    maritalStatus: 'Single',
+    parents: {
+      father: 'Md. Abu Sufian',
+      mother: 'Tahmina Akter',
+    },
+    birthPlace: 'P.G. Hospital, Dhaka',
+    nameOrigin:
+      'Tanvir from Tahmina, Nahian from Sufian, and Swapnil chosen by my grandfather with my mother\'s agreement.',
+    hobbies: ['Web Development', 'Web Surfing', 'Freelancing'],
+  },
+  education: [
+    {
+      institution: 'Military Institute of Science and Technology (MIST)',
+      location: 'Mirpur, Dhaka',
+      degree: 'BSc in Computer Science and Engineering',
+      result: 'CGPA 3.39',
+      year: '2023',
+    },
+    {
+      institution: 'Signal Training School and Center',
+      location: 'Jashore',
+      degree: 'Cyber Security Course',
+      result: 'Grade A (77%)',
+      year: '2023',
+    },
+    {
+      institution: 'Bir Shreshtha Noor Mohammad Public College',
+      location: 'Pilkana, Dhaka',
+      degree: 'Higher Secondary Certificate (HSC)',
+      result: 'GPA 5.00',
+      year: '2016',
+    },
+    {
+      institution: 'Ideal School and College',
+      location: 'Motijheel, Dhaka',
+      degree: 'Secondary School Certificate (SSC)',
+      result: 'GPA 5.00',
+      year: '2014',
+    },
   ],
+  skillHighlights: [
+    'Cybersecurity & Cyber Auditing',
+    'ICT Network Infrastructure',
+    'Strategic Operations Planning',
+    'Leadership (70–500 personnel)',
+    'Microsoft Office Suite',
+    'Web Development',
+  ],
+  skillCategories: [
+    {
+      category: 'IT & Development',
+      items: [
+        {
+          name: 'Website Developer',
+          rating: 4.0,
+          detail:
+            'I build responsive, secure websites and online portals with clean architecture and intuitive user experience, combining my military discipline with modern web technologies.',
+        },
+        {
+          name: 'App Developer',
+          rating: 3.0,
+          detail:
+            'I can create mobile and desktop applications tailored to user needs with a focus on performance and usability. I created applications with Java during my training at BMA but over the years I have focused more on web development. However, I can restart and relearn quickly since I had the exposure.',
+        },
+        {
+          name: 'Web Security Auditor',
+          rating: 3.7,
+          detail:
+            'Having completed the Cyber Security Course, I have in-depth knowledge of website security and auditing. I perform security audits to identify vulnerabilities and ensure compliance with best practices. During test sessions in Jessore, I conducted a live audit and security check at an Artillery Unit in the Cantonment and identified several vulnerabilities.',
+        },
+        {
+          name: 'Network Planner',
+          rating: 4.0,
+          detail:
+            'I design and implement secure ICT networks for field communication, drawing on my Corps of Signals background and hands-on experience deploying networks in operational environments.',
+        },
+      ],
+    },
+    {
+      category: 'Design and Application Expertise',
+      items: [
+        {
+          name: 'MS PowerPoint',
+          rating: 4.8,
+          detail:
+            'I have practiced PowerPoint since before my career and have mastered it professionally. I can create presentations in unique styles quickly. I have made presentations for Army Project Study, Jolshiri Housing Limited, Dhaka Ladies Club, Divisional Operation Plan, Chittagong Hill Tracts Special Operations Plan, and many classified unit presentations.',
+        },
+        {
+          name: 'Canva',
+          rating: 4.0,
+          detail:
+            'I create visually appealing designs for social media, presentations, and branding using Canva. I usually prefer MS PowerPoint, but when I need an animated card quickly for birthdays or Eid with free templates, Canva is my go-to.',
+        },
+        {
+          name: 'MS Word',
+          rating: 4.2,
+          detail:
+            'I produce professional documents, reports, and correspondence with advanced formatting, templates, and collaborative editing features.',
+        },
+        {
+          name: 'MS Excel',
+          rating: 4.3,
+          detail:
+            'I manage and analyze data efficiently using Excel\'s advanced features. I created a whole information table of my company\'s soldiers who were present in the unit. Based on variables like leave, posting, and attachments, I automated the total number of present soldiers — highly praised by my seniors. I use macros and charts to make data more appealing.',
+        },
+      ],
+    },
+    {
+      category: 'Security & Operations',
+      items: [
+        {
+          name: 'CCTV Planner',
+          rating: 4.5,
+          detail:
+            'CCTV is the most common security system for any institution. I completed a CCTV course during my career, making me proficient in handling CCTV-related problems. As an engineer and field officer, I think from the intruder\'s perspective first — finding flaws before fixing them with additional measures like CCTV coverage.',
+        },
+        {
+          name: 'Emergency Security Operations Planner',
+          rating: 4.2,
+          detail:
+            'I create contingency plans for emergency security operations in critical environments. I deliberately planned a hostage rescue exercise on my own accord, showing troops how to rescue hostages in an under-construction building while terrorists were ordered to fire and flee on sight. One of four terrorists escaped, revealing weaknesses that would matter in a real mission — realism is how I treat my career.',
+        },
+      ],
+    },
+    {
+      category: 'Management and Administration',
+      items: [
+        {
+          name: 'Administrative Manager',
+          rating: 4.3,
+          detail:
+            'I served as adjutant for most of my military career — the most active administrative appointment in a unit. This taught me troops\' psychology and their way of doing tasks. I always found the right person for any task, or personally guided them to ensure smooth results while keeping resources organized to complete administrative work with minimal intervention from authorities.',
+        },
+        {
+          name: 'Resource Planner',
+          rating: 4.0,
+          detail:
+            'I plan and allocate resources effectively to meet organizational goals. As an administrator I have always checked, restocked, and organized my resources. Future assumptions with multiple contingencies have kept me prepared for dire needs.',
+        },
+      ],
+    },
+    {
+      category: 'Special Skills',
+      items: [
+        {
+          name: 'Firing',
+          rating: 4.5,
+          detail:
+            'As military personnel, we were trained to fire multiple weapon types. I competed as a best firer and participated in a Divisional Firing competition. Weapons: Assault Rifle (300m day / 100m night), Light Machine Gun (200m / 100m), Sub Machine Gun (200m / 100m), Rocket Launcher (500m day), Pistol (25m day), Grenade (75% accuracy day), Grenade Launcher Rifle (200m day).',
+        },
+        {
+          name: 'Public Speaking',
+          rating: 4.0,
+          detail:
+            'I deliver clear, confident presentations to diverse audiences — from briefing senior officers to addressing troops and civilian stakeholders.',
+        },
+        {
+          name: 'Cultural',
+          rating: 4.0,
+          detail:
+            'As someone from Bangladesh\'s rich cultural heritage, I participate in cultural activities whenever I can. I have no stage fear thanks to countless performances. Skills include drama, acting, and singing in chorus or solo.',
+        },
+      ],
+    },
+    {
+      category: 'Languages',
+      items: [
+        {
+          name: 'Bangla',
+          rating: 5.0,
+          detail:
+            'As a native speaker, I speak, write, and read fluently with excellent communication skills. I understand most regional accents and can adapt my accent to make conversations more natural.',
+        },
+        {
+          name: 'English',
+          rating: 4.7,
+          detail:
+            'Fluent in English with excellent written and verbal communication skills. I understand most country accents and often speak in a mixed US and British accent.',
+        },
+        {
+          name: 'Hindi',
+          rating: 4.0,
+          detail:
+            'Strong conversational Hindi for everyday communication and understanding media and regional interactions.',
+        },
+        {
+          name: 'Urdu',
+          rating: 3.0,
+          detail:
+            'Basic proficiency in Urdu for conversational purposes. I can listen and understand Urdu most of the time, though conversation with a fluent speaker will be a bit slow.',
+        },
+      ],
+    },
+  ] satisfies SkillCategory[],
   journey: [
     {
-      year: '1988',
-      role: 'Commissioned Officer',
-      org: 'National Defense Academy',
-      description:
-        'Graduated with honors and commissioned as Second Lieutenant, beginning a career defined by service and excellence.',
+      year: '1998',
+      category: 'life',
+      title: 'Birth',
+      detail:
+        '14 September 1998 — born at P.G. Hospital, Dhaka. My father Md. Abu Sufian and mother Tahmina Akter welcomed me surrounded by relatives. My name blends both parents\' names: Tanvir from Tahmina, Nahian from Sufian, and Swapnil chosen by my grandfather.',
     },
+    { year: '2004', category: 'education', title: 'Elementary School' },
+    { year: '2006', category: 'education', title: 'Primary School' },
+    { year: '2009', category: 'education', title: 'Graduation from Primary School' },
+    { year: '2016', category: 'achievement', title: 'Higher School Certificate', detail: 'GPA 5.00' },
+    { year: '2016', category: 'education', title: 'Graduated from College' },
+    { year: '2016', category: 'achievement', title: 'ISSB Selection' },
+    { year: '2016', category: 'job', title: 'Joined BMA' },
+    { year: '2017', category: 'education', title: 'Started MIST in BMA' },
+    { year: '2019', category: 'job', title: 'Commissioned as Army Officer' },
+    { year: '2020', category: 'job', title: '11 Signal Battalion' },
+    { year: '2020', category: 'education', title: 'Joined MIST in Dhaka' },
+    { year: '2020', category: 'life', title: 'Pandemic Covid-19' },
+    { year: '2020', category: 'education', title: 'Return to MIST after Lockdown' },
+    { year: '2022', category: 'life', title: 'Contracted Covid-19' },
+    { year: '2022', category: 'job', title: 'Promoted to Captain' },
     {
-      year: '1995',
-      role: 'Company Commander',
-      org: 'Infantry Battalion',
-      description:
-        'Led a rifle company through multiple deployments, earning recognition for tactical proficiency and troop welfare.',
+      year: '2022',
+      category: 'education',
+      title: 'Graduated from MIST',
+      detail: 'BSc in Computer Science and Engineering, CGPA 3.39',
     },
+    { year: '2022', category: 'job', title: 'Returned to 11 Signal Battalion' },
+    { year: '2022', category: 'achievement', title: 'Officers Basic Course (Signals) 45' },
+    { year: '2022', category: 'life', title: 'Contracted Covid-19 (2nd time)' },
+    { year: '2023', category: 'job', title: 'Army Project Study' },
+    { year: '2023', category: 'achievement', title: 'Cyber Security Course 2' },
     {
-      year: '2004',
-      role: 'Staff Officer',
-      org: 'Division Headquarters',
-      description:
-        'Advised senior leadership on operational planning, logistics coordination, and inter-unit communication.',
-    },
-    {
-      year: '2012',
-      role: 'Battalion Commander',
-      org: 'Special Operations Unit',
-      description:
-        'Commanded a battalion in high-readiness operations, implementing training reforms that raised readiness scores by 30%.',
-    },
-    {
-      year: '2018',
-      role: 'Senior Advisor',
-      org: 'Ministry of Defense',
-      description:
-        'Contributed to defense modernization initiatives and veteran transition programs at the national level.',
+      year: '2023',
+      category: 'achievement',
+      title: 'Basic Commando Course 73',
+      detail: 'School of Infantry and Tactics — 30 August to 5 October 2023. BA-10481 Captain Tanvir Nahian Swapnil.',
     },
     {
       year: '2023',
-      role: 'Retired Captain',
-      org: 'Honorable Discharge',
-      description:
-        'Retired after 35 years of service. Now mentors young officers and supports veteran community initiatives.',
+      category: 'achievement',
+      title: "Officers' Weapons Course 107",
+      detail: 'School of Infantry and Tactics — 15 October to 30 November 2023. BA-10481 Captain Tanvir Nahian Swapnil.',
     },
-  ],
+    {
+      year: '2024',
+      category: 'job',
+      title: 'Inter Divisional Firing Competition — Team Captain',
+    },
+    { year: '2024', category: 'job', title: 'Posting to 7 Signal Battalion' },
+    { year: '2024', category: 'life', title: 'July–August Political Incident' },
+    {
+      year: '2024',
+      category: 'job',
+      title: 'Hill Tracts Deployment',
+      detail:
+        'Commanded 70 personnel during Operation Utoron in Bandarban, Chittagong Hill Tracts. Served as cybersecurity advisor during sensitive operations and led operational activities in Cox\'s Bazar and hilly regions.',
+    },
+    { year: '2025', category: 'job', title: 'Back to 7 Signal Battalion' },
+    { year: '2025', category: 'achievement', title: 'Recognition for PowerPoint Design' },
+    { year: '2025', category: 'job', title: 'Leaving Army' },
+  ] satisfies JourneyEvent[],
   achievements: [
     {
-      title: 'Meritorious Service Medal',
-      date: '2010',
+      title: "GOC's Coin of Excellence",
+      date: 'CHT Service',
       category: 'Honor',
       description:
-        'Awarded for exceptional leadership during a critical peacekeeping deployment under adverse conditions.',
+        'Awarded for outstanding service in the Chittagong Hill Tracts under 24 Infantry Division.',
     },
     {
-      title: 'Command Excellence Award',
-      date: '2014',
-      category: 'Leadership',
+      title: 'Serving with 97 Infantry Brigade',
+      date: 'CHT Deployment',
+      category: 'Service',
       description:
-        'Recognized for transforming battalion readiness and fostering a culture of accountability and innovation.',
+        'A token momento for serving in the Chittagong Hill Tracts with HQ 97 Infantry Brigade — Southern Shield.',
     },
     {
-      title: 'Defense Innovation Fellowship',
-      date: '2017',
-      category: 'Innovation',
+      title: 'Basic Commando Course 73',
+      date: 'Aug – Oct 2023',
+      category: 'Military Course',
       description:
-        'Selected to advise on integrating modern technology into traditional military training curricula.',
+        'Successfully completed Basic Commando Course 73 under the School of Infantry and Tactics, Bangladesh Army. BA-10481 Captain Tanvir Nahian Swapnil.',
     },
     {
-      title: 'Veteran Mentorship Program',
+      title: "Officers' Weapons Course 107",
+      date: 'Oct – Nov 2023',
+      category: 'Military Course',
+      description:
+        "Successfully completed Officers' Weapons Course 107 under the School of Infantry and Tactics, Bangladesh Army. BA-10481 Captain Tanvir Nahian Swapnil.",
+    },
+    {
+      title: 'Operation Utoron — Bandarban',
       date: '2024',
-      category: 'Community',
+      category: 'Operations',
       description:
-        'Founded a mentorship network connecting retired officers with cadets and junior leaders nationwide.',
+        'Commanded 70 personnel during Operation Utoron in Bandarban, Chittagong Hill Tracts. Designed secure ICT networks and served as cybersecurity advisor in remote operational areas.',
     },
-  ],
+  ] satisfies Achievement[],
   contacts: {
-    email: 'capt.nahian@example.com',
-    github: 'https://github.com/ZabulanaKakil',
-    linkedin: 'https://linkedin.com/in/capt-nahian',
+    email: 'officialtanvirnahian@gmail.com',
+    phones: ['+8801790136979', '+8801608892998'],
+    whatsapp: '+8801790136979',
     location: 'Dhaka, Bangladesh',
+    cvUrl: 'https://tanvirnahian.gt.tc/mycv.pdf',
+    links: [
+      {
+        label: 'Email',
+        href: 'mailto:officialtanvirnahian@gmail.com',
+        copyValue: 'officialtanvirnahian@gmail.com',
+      },
+      {
+        label: 'WhatsApp',
+        href: 'https://wa.me/8801790136979',
+        copyValue: '+8801790136979',
+        external: true,
+      },
+      {
+        label: 'Phone',
+        href: 'tel:+8801790136979',
+        copyValue: '+8801790136979',
+      },
+      {
+        label: 'Alt. Phone',
+        href: 'tel:+8801608892998',
+        copyValue: '+8801608892998',
+      },
+      {
+        label: 'Facebook',
+        href: 'https://facebook.com/tanvir.nahian.96',
+        copyValue: 'facebook.com/tanvir.nahian.96',
+        external: true,
+      },
+      {
+        label: 'Instagram',
+        href: 'https://instagram.com/tanvirnahian',
+        copyValue: 'instagram.com/tanvirnahian',
+        external: true,
+      },
+      {
+        label: 'LinkedIn',
+        href: 'https://linkedin.com/in/capt-tanvir-nahian',
+        copyValue: 'linkedin.com/in/capt-tanvir-nahian',
+        external: true,
+      },
+      {
+        label: 'GitHub',
+        href: 'https://github.com/ZabulanaKakil',
+        copyValue: 'github.com/ZabulanaKakil',
+        external: true,
+      },
+      {
+        label: 'Discord',
+        href: 'https://discord.com/users/guavanovitch',
+        copyValue: 'guavanovitch',
+        external: true,
+      },
+    ] satisfies ContactLink[],
   },
 } as const
 
-export type SectionId = 'info' | 'journey' | 'achievements' | 'contacts'
+export const personalSpecs: PersonalSpec[] = [
+  { label: 'Full Name', value: portfolio.name },
+  { label: 'Service ID', value: portfolio.personal.serviceId },
+  { label: 'Date of Birth', value: portfolio.personal.dob },
+  { label: 'Location', value: portfolio.personal.location },
+  { label: 'Height', value: portfolio.personal.height },
+  { label: 'Weight', value: portfolio.personal.weight },
+  { label: 'Marital Status', value: portfolio.personal.maritalStatus },
+  {
+    label: 'Education',
+    value: 'SSC GPA 5.00 · HSC GPA 5.00 · BSc CSE CGPA 3.39',
+  },
+  { label: 'Languages', value: 'Bangla, English, Hindi, Urdu' },
+  { label: 'Hobbies', value: portfolio.personal.hobbies.join(', ') },
+]
 
 export const sections: { id: SectionId; label: string }[] = [
   { id: 'info', label: 'Info' },
   { id: 'journey', label: 'Journey' },
+  { id: 'skills', label: 'Skills' },
   { id: 'achievements', label: 'Achievements' },
   { id: 'contacts', label: 'Contacts' },
 ]

@@ -4,8 +4,9 @@ import type { SectionId } from '../data/portfolio'
 const accentMap: Record<SectionId, string> = {
   info: 'border-google-blue',
   journey: 'border-google-green',
-  achievements: 'border-google-yellow',
-  contacts: 'border-google-red',
+  skills: 'border-google-yellow',
+  achievements: 'border-google-red',
+  contacts: 'border-google-blue',
 }
 
 interface SectionWrapperProps {
