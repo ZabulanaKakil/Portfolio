@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
 import { Award } from 'lucide-react'
 import { portfolio } from '../data/portfolio'
 import { SectionWrapper } from '../components/SectionWrapper'
+import { Card3D } from '../components/Card3D'
 
 const categoryColors: Record<string, string> = {
   Honor: 'text-google-red bg-google-red/15',
@@ -19,32 +19,31 @@ export function AchievementsSection() {
     >
       <div className="grid gap-5 sm:grid-cols-2">
         {portfolio.achievements.map((item, index) => (
-          <motion.article
+          <Card3D
             key={item.title}
+            as="article"
+            className="card-glass flex flex-col overflow-hidden"
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: index * 0.08 }}
-            className="card-glass flex flex-col overflow-hidden"
           >
-            <div className="flex h-32 items-center justify-center bg-[var(--surface-elevated)]">
-              <Award size={40} className="text-google-yellow/60" />
+            <div className="flex h-32 items-center justify-center bg-gradient-to-br from-[var(--surface-elevated)] to-transparent">
+              <Award size={40} className="text-google-yellow/70" />
             </div>
             <div className="flex flex-1 flex-col p-6">
-              <div className="flex items-start justify-between gap-3">
-                <span
-                  className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryColors[item.category] ?? 'bg-[var(--surface-elevated)] text-[var(--text-muted)]'}`}
-                >
-                  {item.category}
-                </span>
-              </div>
+              <span
+                className={`w-fit rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryColors[item.category] ?? 'bg-[var(--surface-elevated)] text-[var(--text-muted)]'}`}
+              >
+                {item.category}
+              </span>
               <h3 className="mt-3 text-lg font-semibold text-[var(--text)]">{item.title}</h3>
               <time className="mt-1 text-sm text-[var(--text-muted)]">{item.date}</time>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--text-muted)]">
                 {item.description}
               </p>
             </div>
-          </motion.article>
+          </Card3D>
         ))}
       </div>
     </SectionWrapper>

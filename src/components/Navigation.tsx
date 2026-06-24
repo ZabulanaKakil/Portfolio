@@ -1,4 +1,4 @@
-import { sections, type SectionId } from '../data/portfolio'
+import { navShortName, sections, type SectionId } from '../data/portfolio'
 import { scrollToSection } from '../hooks/useActiveSection'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -11,7 +11,7 @@ export function DesktopNav({ activeSection }: NavigationProps) {
     <header className="fixed top-0 right-0 left-0 z-50 hidden border-b border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-md md:block">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <span className="text-sm font-semibold tracking-wide text-[var(--text)]">
-          Tanvir Nahian
+          {navShortName}
         </span>
         <ul className="flex items-center gap-1">
           {sections.map(({ id, label }) => (

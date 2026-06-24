@@ -1,45 +1,25 @@
-import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { portfolio, personalSpecs } from '../data/portfolio'
 import { SectionWrapper } from '../components/SectionWrapper'
-import { useReducedMotion } from '../hooks/useMedia'
 import { GradientFallback } from '../components/GradientFallback'
-import type { SectionId } from '../data/portfolio'
 import heroImg from '../assets/hero.png'
 
-const Scene3D = lazy(() =>
-  import('../components/Scene3D').then((m) => ({ default: m.Scene3D })),
-)
-
-interface InfoSectionProps {
-  activeSection: SectionId
-  isMobile: boolean
-}
-
-export function InfoSection({ activeSection, isMobile }: InfoSectionProps) {
-  const reducedMotion = useReducedMotion()
-
+export function InfoSection() {
   return (
     <>
-      {reducedMotion ? (
-        <GradientFallback />
-      ) : (
-        <Suspense fallback={<GradientFallback />}>
-          <Scene3D activeSection={activeSection} isMobile={isMobile} />
-        </Suspense>
-      )}
+      <GradientFallback />
       <SectionWrapper id="info" title="" subtitle="">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="card-glass max-w-4xl p-6 md:p-10"
+          className="card-glass hero-card max-w-4xl p-6 md:p-10"
         >
           <div className="flex flex-col gap-8 md:flex-row md:items-start">
             <img
               src={heroImg}
               alt={portfolio.name}
-              className="mx-auto h-40 w-40 shrink-0 rounded-2xl border border-[var(--border)] object-cover object-top md:mx-0 md:h-48 md:w-48"
+              className="mx-auto h-40 w-40 shrink-0 rounded-2xl border-2 border-[var(--border)] object-cover object-top shadow-lg md:mx-0 md:h-48 md:w-48"
               loading="eager"
             />
             <div className="min-w-0 flex-1">
@@ -49,7 +29,7 @@ export function InfoSection({ activeSection, isMobile }: InfoSectionProps) {
               <h1 className="text-[clamp(1.75rem,5vw,3rem)] font-bold leading-tight text-[var(--text)]">
                 {portfolio.name}
               </h1>
-              <p className="mt-3 text-[clamp(1rem,2.5vw,1.25rem)] font-medium text-[var(--text-muted)]">
+              <p className="mt-3 text-[clamp(1rem,2.5vw,1.25rem)] font-medium leading-snug text-[var(--text-muted)]">
                 {portfolio.tagline}
               </p>
             </div>

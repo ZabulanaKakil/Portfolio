@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 import { portfolio, type SkillItem } from '../data/portfolio'
 import { SectionWrapper } from '../components/SectionWrapper'
 import { DetailModal } from '../components/DetailModal'
+import { Card3D } from '../components/Card3D'
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -41,19 +41,19 @@ export function SkillsSection() {
             <h3 className="mb-4 text-lg font-semibold text-[var(--text)]">{group.category}</h3>
             <div className="skills-grid">
               {group.items.map((item, index) => (
-                <motion.button
+                <Card3D
                   key={item.name}
-                  type="button"
+                  onClick={() => setSelected(item)}
+                  className="card-glass flex min-h-11 flex-col gap-2 p-4 text-left"
                   initial={{ opacity: 0, scale: 0.96 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: '-30px' }}
                   transition={{ delay: groupIndex * 0.05 + index * 0.04 }}
-                  onClick={() => setSelected(item)}
-                  className="card-glass flex min-h-11 flex-col gap-2 p-4 text-left transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <span className="font-semibold text-[var(--text)]">{item.name}</span>
                   <StarRating rating={item.rating} />
-                </motion.button>
+                  <span className="mt-auto text-xs text-[var(--text-muted)]">Tap for details</span>
+                </Card3D>
               ))}
             </div>
           </div>

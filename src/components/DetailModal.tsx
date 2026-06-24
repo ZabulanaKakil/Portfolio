@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 
 interface DetailModalProps {
@@ -24,9 +25,9 @@ export function DetailModal({ title, open, onClose, children }: DetailModalProps
 
   if (!open) return null
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex items-end justify-center p-4 sm:items-center"
+      className="fixed inset-0 z-[200] flex items-end justify-center p-4 sm:items-center"
       role="dialog"
       aria-modal="true"
       aria-labelledby="detail-modal-title"
@@ -37,7 +38,7 @@ export function DetailModal({ title, open, onClose, children }: DetailModalProps
         aria-label="Close dialog"
         onClick={onClose}
       />
-      <div className="card-glass relative z-10 max-h-[85vh] w-full max-w-lg overflow-y-auto p-6 sm:p-8">
+      <div className="card-glass relative z-10 max-h-[85vh] w-full max-w-lg overflow-y-auto p-6 shadow-2xl sm:p-8">
         <button
           type="button"
           onClick={onClose}
@@ -51,6 +52,7 @@ export function DetailModal({ title, open, onClose, children }: DetailModalProps
         </h3>
         <div className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

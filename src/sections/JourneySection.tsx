@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
 import {
   journeyCategoryLabels,
   portfolio,
@@ -8,6 +7,7 @@ import {
 } from '../data/portfolio'
 import { SectionWrapper } from '../components/SectionWrapper'
 import { DetailModal } from '../components/DetailModal'
+import { Card3D } from '../components/Card3D'
 
 const categoryStyles: Record<JourneyCategory, string> = {
   life: 'bg-google-red/20 text-google-red border-google-red/30',
@@ -29,23 +29,26 @@ export function JourneySection() {
     return Array.from(map.entries()).sort(([a], [b]) => Number(a) - Number(b))
   }, [])
 
+  const legend = (
+    <div className="flex flex-wrap gap-2">
+      {(Object.keys(journeyCategoryLabels) as JourneyCategory[]).map((cat) => (
+        <span
+          key={cat}
+          className={`rounded-full border px-3 py-1 text-xs font-semibold ${categoryStyles[cat]}`}
+        >
+          {journeyCategoryLabels[cat]}
+        </span>
+      ))}
+    </div>
+  )
+
   return (
     <SectionWrapper
       id="journey"
       title="Through the ages"
-      subtitle="Tap any card for details. A color-coded timeline of life, education, achievements, and service."
+      subtitle="Tap any card for details. Colors indicate life, education, achievements, and service milestones."
+      legend={legend}
     >
-      <div className="mb-6 flex flex-wrap gap-2">
-        {(Object.keys(journeyCategoryLabels) as JourneyCategory[]).map((cat) => (
-          <span
-            key={cat}
-            className={`rounded-full border px-3 py-1 text-xs font-semibold ${categoryStyles[cat]}`}
-          >
-            {journeyCategoryLabels[cat]}
-          </span>
-        ))}
-      </div>
-
       <div className="space-y-8">
         {groupedByYear.map(([year, events], groupIndex) => (
           <div key={year} className="journey-year-group">
@@ -55,24 +58,23 @@ export function JourneySection() {
             </div>
             <div className="journey-grid">
               {events.map((event, index) => (
-                <motion.button
+                <Card3D
                   key={`${year}-${event.title}-${index}`}
-                  type="button"
+                  onClick={() => setSelected(event)}
+                  className={`card-glass flex min-h-11 flex-col items-center justify-center border p-4 text-center ${categoryStyles[event.category]}`}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ delay: groupIndex * 0.03 + index * 0.04 }}
-                  onClick={() => setSelected(event)}
-                  className={`card-glass flex min-h-11 flex-col items-center justify-center border p-4 text-center transition-transform hover:scale-[1.02] active:scale-[0.98] ${categoryStyles[event.category]}`}
                 >
                   <span className="text-xs font-semibold uppercase tracking-wide opacity-80">
                     {journeyCategoryLabels[event.category]}
                   </span>
                   <span className="mt-2 text-sm font-semibold leading-snug">{event.title}</span>
                   {event.detail && (
-                    <span className="mt-1 line-clamp-2 text-xs opacity-75">Tap for more</span>
+                    <span className="mt-1 text-xs opacity-75">Tap for more</span>
                   )}
-                </motion.button>
+                </Card3D>
               ))}
             </div>
           </div>

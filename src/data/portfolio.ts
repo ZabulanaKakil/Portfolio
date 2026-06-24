@@ -436,8 +436,10 @@ export const personalSpecs: PersonalSpec[] = [
   { label: 'Hobbies', value: portfolio.personal.hobbies.join(', ') },
 ]
 
+export const navShortName = 'Tanvir Nahian'
+
 export const sections: { id: SectionId; label: string }[] = [
-  { id: 'info', label: 'Info' },
+  { id: 'info', label: navShortName },
   { id: 'journey', label: 'Journey' },
   { id: 'skills', label: 'Skills' },
   { id: 'achievements', label: 'Achievements' },
