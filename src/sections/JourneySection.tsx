@@ -55,7 +55,7 @@ export function JourneySection() {
       legend={legend}
     >
       <div className="space-y-10">
-        {groupedByYear.map(([year, events], groupIndex) => (
+        {groupedByYear.map(([year, events]) => (
           <div key={year} className="journey-year-group">
             <div className="journey-year-header">
               <h3 className="journey-year-label">{year}</h3>
@@ -67,9 +67,6 @@ export function JourneySection() {
                   key={`${year}-${event.title}-${index}`}
                   onClick={() => setSelected(event)}
                   className={`card-glass journey-card ${cardClass[event.category]}`}
-                  initial={false}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: groupIndex * 0.03 + index * 0.04, duration: 0.35 }}
                 >
                   <span className={`journey-badge ${badgeClass[event.category]}`}>
                     <span className="journey-badge-swatch" aria-hidden="true" />

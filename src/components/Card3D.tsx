@@ -1,12 +1,6 @@
 import { useCallback, useRef, type MouseEvent, type ReactNode } from 'react'
-import { motion, type HTMLMotionProps } from 'framer-motion'
 
-type MotionExtras = Pick<
-  HTMLMotionProps<'div'>,
-  'initial' | 'animate' | 'transition'
->
-
-interface Card3DProps extends MotionExtras {
+interface Card3DProps {
   children: ReactNode
   onClick?: () => void
   className?: string
@@ -32,9 +26,6 @@ export function Card3D({
   onClick,
   className = '',
   as = 'button',
-  initial = false,
-  animate = { opacity: 1 },
-  transition,
 }: Card3DProps) {
   const innerRef = useRef<HTMLDivElement>(null)
   const canTilt = typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -65,9 +56,6 @@ export function Card3D({
     className: 'card-3d',
     onMouseMove: canTilt ? onMouseMove : undefined,
     onMouseLeave: canTilt ? resetTilt : undefined,
-    initial,
-    animate,
-    transition,
   }
 
   const inner = (
@@ -77,12 +65,12 @@ export function Card3D({
   )
 
   if (as === 'article') {
-    return <motion.article {...sharedProps}>{inner}</motion.article>
+    return <article {...sharedProps}>{inner}</article>
   }
 
   return (
-    <motion.button type="button" onClick={onClick} {...sharedProps}>
+    <button type="button" onClick={onClick} {...sharedProps}>
       {inner}
-    </motion.button>
+    </button>
   )
 }

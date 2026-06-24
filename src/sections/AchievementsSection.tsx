@@ -18,14 +18,11 @@ export function AchievementsSection() {
       subtitle="Recognition earned through service, courses, and operational excellence."
     >
       <div className="achievements-grid">
-        {portfolio.achievements.map((item, index) => (
+        {portfolio.achievements.map((item) => (
           <Card3D
             key={item.title}
             as="article"
             className="card-glass flex flex-col overflow-hidden"
-            initial={false}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.08, duration: 0.35 }}
           >
             <div className="flex h-32 items-center justify-center bg-gradient-to-br from-[var(--surface-elevated)] to-transparent">
               <Award size={40} className="text-google-yellow/70" />

@@ -36,18 +36,15 @@ export function SkillsSection() {
       subtitle="Tap any card to read more. Star ratings reflect self-assessed proficiency."
     >
       <div className="space-y-10">
-        {portfolio.skillCategories.map((group, groupIndex) => (
+        {portfolio.skillCategories.map((group) => (
           <div key={group.category}>
             <h3 className="mb-4 text-center text-lg font-semibold text-[var(--text)]">{group.category}</h3>
             <div className="skills-grid">
-              {group.items.map((item, index) => (
+              {group.items.map((item) => (
                 <Card3D
                   key={item.name}
                   onClick={() => setSelected(item)}
                   className="card-glass skill-card min-h-11 gap-2 p-4"
-                  initial={false}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: groupIndex * 0.05 + index * 0.04, duration: 0.35 }}
                 >
                   <span className="font-semibold text-[var(--text)]">{item.name}</span>
                   <StarRating rating={item.rating} />
