@@ -18,39 +18,39 @@ export function InfoSection() {
                 loading="eager"
               />
             </div>
-            <div className="min-w-0 flex-1">
-              <h1 className="text-[clamp(1.75rem,5vw,3rem)] font-bold leading-tight text-[var(--text)]">
+            <div className="min-w-0 w-full">
+              <h1 className="text-[clamp(1.75rem,5vw,3rem)] font-bold leading-tight text-theme">
                 {portfolio.name}
               </h1>
               <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-google-blue">
                 {portfolio.title}
               </p>
-              <p className="mt-3 text-[clamp(1rem,2.5vw,1.25rem)] font-medium leading-snug text-[var(--text-muted)]">
+              <p className="mt-3 text-[clamp(1rem,2.5vw,1.25rem)] font-medium leading-snug text-theme-muted">
                 {portfolio.tagline}
               </p>
             </div>
           </div>
 
-          <div className="mt-8 space-y-4">
-            <p className="text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed text-[var(--text-muted)]">
+          <div className="mt-8 space-y-4 text-theme-muted">
+            <p className="text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed">
               {portfolio.bio}
             </p>
-            <p className="text-sm leading-relaxed text-[var(--text-muted)]">{portfolio.cvSummary}</p>
+            <p className="text-sm leading-relaxed">{portfolio.cvSummary}</p>
           </div>
 
           <div className="mt-8 overflow-x-auto rounded-xl border border-[var(--border)]">
             <table className="spec-table w-full min-w-[280px] text-sm">
               <thead>
                 <tr className="border-b border-[var(--border)] bg-[var(--surface-elevated)]">
-                  <th className="px-4 py-3 font-semibold text-[var(--text)]">Specification</th>
-                  <th className="px-4 py-3 font-semibold text-[var(--text)]">Details</th>
+                  <th className="px-4 py-3 font-semibold text-theme">Specification</th>
+                  <th className="px-4 py-3 font-semibold text-theme">Details</th>
                 </tr>
               </thead>
               <tbody>
                 {personalSpecs.map((row) => (
                   <tr key={row.label} className="border-b border-[var(--border)] last:border-0">
-                    <td className="px-4 py-3 font-medium text-[var(--text-muted)]">{row.label}</td>
-                    <td className="px-4 py-3 text-[var(--text)]">{row.value}</td>
+                    <td className="px-4 py-3 font-medium text-theme-muted">{row.label}</td>
+                    <td className="px-4 py-3 text-theme">{row.value}</td>
                   </tr>
                 ))}
               </tbody>
@@ -65,7 +65,7 @@ export function InfoSection() {
             ))}
           </div>
 
-          <blockquote className="hero-quote mt-8 italic text-[var(--text-muted)]">
+          <blockquote className="hero-quote mt-8 italic text-theme-muted">
             <p className="text-sm leading-relaxed">&ldquo;{portfolio.quote.text}&rdquo;</p>
             <footer className="mt-2 text-xs not-italic">— {portfolio.quote.author}</footer>
           </blockquote>
