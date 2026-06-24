@@ -203,6 +203,7 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 - **Fix:** Updated `.github/workflows/static.yml` — verify profile PNG in dist, deploy via GitHub Actions Pages **and** push `dist/` to `gh-pages` branch; added `public/.nojekyll`.
 - **User action required:** Repo **Settings → Pages → Source** → **GitHub Actions** (or branch **`gh-pages`** / root). Not `main`/root.
 - Build verified: `npm run lint` + `npm run build` → `dist/assets/profile-BgyXCgPl.png`
+- Follow-up `bdcdad2`: `continue-on-error` on Actions Pages deploy so `gh-pages` branch publish still runs when Pages source is not GitHub Actions
 
 ---
 
