@@ -41,22 +41,22 @@ export function SectionWrapper({ id, title, subtitle, legend, children }: Sectio
   const accent = accentMap[id]
 
   return (
-    <section id={id} className="section-anchor mx-auto w-full max-w-6xl px-5 py-12 md:px-6 md:py-20">
+    <section id={id} className="section-anchor mx-auto w-full min-w-0 max-w-6xl px-4 py-8 sm:px-5 sm:py-10 md:px-6 md:py-20">
       {(title || subtitle || legend) && (
-        <header className="section-header-sticky mb-8 md:mb-10">
+        <header className="section-header-sticky mb-6 md:mb-10">
           <div className={`section-header-panel bg-gradient-to-r ${accent.glow} to-transparent`}>
             {title && (
-              <div className="flex items-center gap-3">
-                <span className={`h-8 w-1 shrink-0 rounded-full ${accent.bar}`} aria-hidden="true" />
+              <div className="flex flex-col items-center gap-2">
+                <span className={`h-1 w-10 shrink-0 rounded-full ${accent.bar}`} aria-hidden="true" />
                 <h2
-                  className={`text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-tight text-[var(--text)] ${accent.accent}`}
+                  className={`min-w-0 text-center text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-tight text-[var(--text)] ${accent.accent}`}
                 >
                   {title}
                 </h2>
               </div>
             )}
             {subtitle && (
-              <p className="mt-2 max-w-none text-[clamp(0.9rem,2.5vw,1.05rem)] leading-relaxed text-[var(--text-muted)]">
+              <p className="mt-2 max-w-none text-center text-[clamp(0.9rem,2.5vw,1.05rem)] leading-relaxed text-[var(--text-muted)]">
                 {subtitle}
               </p>
             )}

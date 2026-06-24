@@ -56,7 +56,6 @@ const iconMap: Record<string, ComponentType<{ size?: number; className?: string 
   Email: Mail,
   WhatsApp: MessageCircle,
   Phone: Phone,
-  'Alt. Phone': Phone,
   Facebook: FacebookIcon,
   Instagram: InstagramIcon,
   LinkedIn: LinkedInIcon,
@@ -68,7 +67,6 @@ const colorMap: Record<string, string> = {
   Email: 'text-google-red',
   WhatsApp: 'text-google-green',
   Phone: 'text-google-blue',
-  'Alt. Phone': 'text-google-blue',
   Facebook: 'text-google-blue',
   Instagram: 'text-google-red',
   LinkedIn: 'text-google-blue',
@@ -97,41 +95,90 @@ export function ContactsSection() {
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="section-content space-y-6"
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45 }}
+        className="space-y-6"
       >
-        <div className="card-glass hero-card flex w-full items-center gap-2 p-4 md:p-5">
+        <div className="card-glass hero-card flex w-full min-w-0 items-center justify-center gap-2 overflow-hidden p-3 sm:p-4 md:p-5">
           <MapPin size={20} className="shrink-0 text-google-green" />
           <span className="text-[var(--text-muted)]">{portfolio.contacts.location}</span>
         </div>
 
+        <a
+          href={portfolio.contacts.cvUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contacts-cv-download"
+        >
+          <Download size={18} aria-hidden="true" />
+          Download CV (PDF)
+        </a>
+
         {copied && (
-          <p className="rounded-lg bg-google-green/15 px-3 py-2 text-sm text-google-green">
+          <p className="rounded-lg bg-google-green/15 px-3 py-2 text-center text-sm text-google-green">
             Copied {copied} to clipboard
           </p>
         )}
 
         <div className="contacts-grid">
-          {portfolio.contacts.links.map(({ label, href, copyValue, external }) => {
+          {portfolio.contacts.links.map((link) => {
+            const { label, href, copyValue, external, numbers } = link
             const Icon = iconMap[label] ?? ExternalLink
             const isExternal = external ?? href.startsWith('http')
+
+            if (numbers?.length) {
+              return (
+                <article key={label} className="card-glass contact-card contact-card--phones min-w-0 overflow-hidden">
+                  <span className="contact-card-title block font-semibold text-[var(--text)]">{label}</span>
+                  <div className="contact-phone-list w-full min-w-0">
+                    {numbers.map((entry) => (
+                      <div key={entry.copyValue} className="contact-card-actions min-w-0">
+                        <a href={entry.href} className="contact-card-link min-w-0 flex-1 overflow-hidden">
+                          <span
+                            className={`contact-icon-wrap ${colorMap[label] ?? 'text-[var(--text)]'}`}
+                          >
+                            <Icon size={20} />
+                          </span>
+                          <span className="min-w-0 flex-1 overflow-hidden text-left">
+                            <span className="block text-xs font-medium uppercase tracking-wide text-[var(--text-muted)]">
+                              {entry.label}
+                            </span>
+                            <span className="block truncate text-sm text-[var(--text-muted)]">
+                              {entry.copyValue}
+                            </span>
+                          </span>
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() => void copyToClipboard(entry.copyValue, `${label} (${entry.label})`)}
+                          className="contact-copy-btn shrink-0"
+                          aria-label={`Copy ${entry.label} ${label}`}
+                        >
+                          <Copy size={18} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              )
+            }
+
             return (
-              <article key={label} className="card-glass contact-card">
-                <div className="flex items-start gap-2">
+              <article key={label} className="card-glass contact-card min-w-0 overflow-hidden">
+                <span className="block font-semibold text-[var(--text)]">{label}</span>
+                <div className="contact-card-actions min-w-0">
                   <a
                     href={href}
                     target={isExternal ? '_blank' : undefined}
                     rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="contact-card-link min-w-0 flex-1"
+                    className="contact-card-link min-w-0 flex-1 overflow-hidden"
                   >
                     <span
                       className={`contact-icon-wrap ${colorMap[label] ?? 'text-[var(--text)]'}`}
                     >
                       <Icon size={20} />
                     </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block font-semibold text-[var(--text)]">{label}</span>
+                    <span className="min-w-0 flex-1 overflow-hidden text-center">
                       <span className="block truncate text-sm text-[var(--text-muted)]">{copyValue}</span>
                     </span>
                     {isExternal && (
@@ -141,7 +188,7 @@ export function ContactsSection() {
                   <button
                     type="button"
                     onClick={() => void copyToClipboard(copyValue, label)}
-                    className="contact-copy-btn"
+                    className="contact-copy-btn shrink-0"
                     aria-label={`Copy ${label}`}
                   >
                     <Copy size={18} />
@@ -151,16 +198,6 @@ export function ContactsSection() {
             )
           })}
         </div>
-
-        <a
-          href={portfolio.contacts.cvUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-google-blue px-4 py-3 font-semibold text-white shadow-lg shadow-google-blue/25 transition-transform hover:scale-[1.02] active:scale-[0.98]"
-        >
-          <Download size={18} />
-          Download CV (PDF)
-        </a>
       </motion.div>
     </SectionWrapper>
   )

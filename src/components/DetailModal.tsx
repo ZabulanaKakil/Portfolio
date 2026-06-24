@@ -47,10 +47,10 @@ export function DetailModal({ title, open, onClose, children }: DetailModalProps
         >
           <X size={20} />
         </button>
-        <h3 id="detail-modal-title" className="pr-12 text-xl font-bold text-[var(--text)]">
+        <h3 id="detail-modal-title" className="pr-12 text-center text-xl font-bold text-[var(--text)]">
           {title}
         </h3>
-        <div className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">{children}</div>
+        <div className="mt-4 text-center text-sm leading-relaxed text-[var(--text-muted)]">{children}</div>
       </div>
     </div>,
     document.body,

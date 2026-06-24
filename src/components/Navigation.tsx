@@ -39,32 +39,41 @@ export function DesktopNav({ activeSection }: NavigationProps) {
 export function MobileNav({ activeSection }: NavigationProps) {
   return (
     <>
-      <div className="fixed top-0 right-0 z-50 p-4 md:hidden">
-        <ThemeToggle />
-      </div>
-      <nav
-        className="fixed right-0 bottom-0 left-0 z-50 border-t border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-md md:hidden"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      <header
+        aria-label="Site header"
+        className="mobile-top-bar fixed top-0 right-0 left-0 z-[45] border-b border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-md md:hidden"
       >
-        <ul className="flex items-stretch justify-around">
+        <div className="mobile-top-bar__inner flex items-center justify-between gap-3 px-4">
+          <span className="min-w-0 truncate text-sm font-semibold tracking-wide text-[var(--text)]">
+            {navShortName}
+          </span>
+          <ThemeToggle className="shrink-0" compact />
+        </div>
+      </header>
+      <nav
+        aria-label="Section navigation"
+        className="mobile-bottom-nav fixed right-0 bottom-0 left-0 z-40 border-t border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-md md:hidden"
+      >
+        <ul className="mobile-bottom-nav__list">
           {sections.map(({ id, label }) => (
-            <li key={id} className="flex-1">
+            <li key={id} className="flex min-w-0 flex-1">
               <button
                 type="button"
                 onClick={() => scrollToSection(id)}
                 aria-current={activeSection === id ? 'page' : undefined}
-                className={`flex min-h-11 w-full flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] font-medium transition-colors sm:text-xs ${
+                className={`flex h-full w-full min-w-0 flex-col items-center justify-center gap-0.5 px-0.5 text-[10px] font-medium transition-colors sm:text-xs ${
                   activeSection === id
                     ? 'text-google-blue'
                     : 'text-[var(--text-muted)]'
                 }`}
               >
                 <span
-                  className={`h-1 w-1 rounded-full ${
+                  className={`h-1 w-1 shrink-0 rounded-full ${
                     activeSection === id ? 'bg-google-blue' : 'bg-transparent'
                   }`}
+                  aria-hidden="true"
                 />
-                {label}
+                <span className="truncate">{label}</span>
               </button>
             </li>
           ))}

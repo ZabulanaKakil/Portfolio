@@ -31,9 +31,9 @@ export function AchievementsSection() {
             <div className="flex h-32 items-center justify-center bg-gradient-to-br from-[var(--surface-elevated)] to-transparent">
               <Award size={40} className="text-google-yellow/70" />
             </div>
-            <div className="flex flex-1 flex-col p-6">
+            <div className="achievement-card-body flex flex-1 flex-col p-6">
               <span
-                className={`w-fit rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryColors[item.category] ?? 'bg-[var(--surface-elevated)] text-[var(--text-muted)]'}`}
+                className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryColors[item.category] ?? 'bg-[var(--surface-elevated)] text-[var(--text-muted)]'}`}
               >
                 {item.category}
               </span>

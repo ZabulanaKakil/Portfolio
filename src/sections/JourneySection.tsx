@@ -16,6 +16,13 @@ const badgeClass: Record<JourneyCategory, string> = {
   job: 'journey-badge--job',
 }
 
+const cardClass: Record<JourneyCategory, string> = {
+  life: 'journey-card--life',
+  education: 'journey-card--education',
+  achievement: 'journey-card--achievement',
+  job: 'journey-card--job',
+}
+
 export function JourneySection() {
   const [selected, setSelected] = useState<JourneyEvent | null>(null)
 
@@ -30,9 +37,10 @@ export function JourneySection() {
   }, [])
 
   const legend = (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap justify-center gap-2">
       {(Object.keys(journeyCategoryLabels) as JourneyCategory[]).map((cat) => (
         <span key={cat} className={`journey-badge ${badgeClass[cat]}`}>
+          <span className="journey-badge-swatch" aria-hidden="true" />
           {journeyCategoryLabels[cat]}
         </span>
       ))}
@@ -50,7 +58,7 @@ export function JourneySection() {
         {groupedByYear.map(([year, events], groupIndex) => (
           <div key={year} className="journey-year-group">
             <div className="journey-year-header">
-              <span className="journey-year-label">{year}</span>
+              <h3 className="journey-year-label">{year}</h3>
               <div className="journey-year-line" aria-hidden="true" />
             </div>
             <div className="journey-grid">
@@ -58,13 +66,14 @@ export function JourneySection() {
                 <Card3D
                   key={`${year}-${event.title}-${index}`}
                   onClick={() => setSelected(event)}
-                  className="card-glass journey-card flex w-full min-h-11 flex-col"
+                  className={`card-glass journey-card ${cardClass[event.category]}`}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ delay: groupIndex * 0.03 + index * 0.04 }}
                 >
                   <span className={`journey-badge ${badgeClass[event.category]}`}>
+                    <span className="journey-badge-swatch" aria-hidden="true" />
                     {journeyCategoryLabels[event.category]}
                   </span>
                   <span className="journey-card-title">{event.title}</span>
@@ -85,6 +94,7 @@ export function JourneySection() {
           <>
             <p className="mb-3">
               <span className={`journey-badge ${badgeClass[selected.category]}`}>
+                <span className="journey-badge-swatch" aria-hidden="true" />
                 {journeyCategoryLabels[selected.category]} · {selected.year}
               </span>
             </p>

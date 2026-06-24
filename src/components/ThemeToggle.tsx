@@ -8,9 +8,10 @@ import {
 
 interface ThemeToggleProps {
   className?: string
+  compact?: boolean
 }
 
-export function ThemeToggle({ className = '' }: ThemeToggleProps) {
+export function ThemeToggle({ className = '', compact = false }: ThemeToggleProps) {
   const { theme, colorTheme, setTheme, setColorTheme, toggleTheme } = useTheme()
   const [open, setOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
@@ -52,9 +53,11 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
         aria-expanded={open}
         aria-haspopup="dialog"
         aria-label="Open theme settings"
-        className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] transition-colors hover:bg-[var(--surface-elevated)]"
+        className={`flex items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] transition-colors hover:bg-[var(--surface-elevated)] ${
+          compact ? 'h-9 w-9' : 'h-11 w-11'
+        }`}
       >
-        <Palette size={20} />
+        <Palette size={compact ? 18 : 20} />
       </button>
 
       {open && (
@@ -62,7 +65,7 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
           ref={panelRef}
           role="dialog"
           aria-label="Theme settings"
-          className="absolute top-[calc(100%+0.5rem)] right-0 z-[60] w-[min(calc(100vw-2rem),18rem)] rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]"
+          className="absolute top-[calc(100%+0.5rem)] right-0 z-[55] w-[min(calc(100vw-2rem),18rem)] rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]"
         >
           <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
             Appearance

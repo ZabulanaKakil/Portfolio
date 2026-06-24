@@ -7,7 +7,7 @@ import { Card3D } from '../components/Card3D'
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-0.5" aria-label={`Rating ${rating} out of 5`}>
+    <div className="flex items-center justify-center gap-0.5" aria-label={`Rating ${rating} out of 5`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
@@ -38,13 +38,13 @@ export function SkillsSection() {
       <div className="space-y-10">
         {portfolio.skillCategories.map((group, groupIndex) => (
           <div key={group.category}>
-            <h3 className="mb-4 text-lg font-semibold text-[var(--text)]">{group.category}</h3>
+            <h3 className="mb-4 text-center text-lg font-semibold text-[var(--text)]">{group.category}</h3>
             <div className="skills-grid">
               {group.items.map((item, index) => (
                 <Card3D
                   key={item.name}
                   onClick={() => setSelected(item)}
-                  className="card-glass flex min-h-11 flex-col gap-2 p-4 text-left"
+                  className="card-glass skill-card min-h-11 gap-2 p-4"
                   initial={{ opacity: 0, scale: 0.96 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: '-30px' }}

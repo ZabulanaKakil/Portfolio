@@ -17,13 +17,13 @@ function App() {
     <>
       <DesktopNav activeSection={activeSection} />
       <MobileNav activeSection={activeSection} />
-      <main className="relative z-10 pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:pb-0 md:pt-16">
+      <main className="mobile-main relative z-10 min-w-0 overflow-x-clip md:overflow-x-visible md:pt-16">
         <InfoSection />
         <JourneySection />
         <SkillsSection />
         <AchievementsSection />
         <ContactsSection />
-        <footer className="mx-auto max-w-6xl px-6 py-8 text-center text-sm text-[var(--text-muted)]">
+        <footer className="mobile-footer mx-auto max-w-6xl px-4 py-6 text-center text-sm text-[var(--text-muted)] sm:px-6 md:py-8">
           © {new Date().getFullYear()} {portfolio.name}. All rights reserved.
         </footer>
       </main>

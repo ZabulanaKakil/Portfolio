@@ -23,7 +23,7 @@
 
 ## Current state
 
-**Last commit:** `daa6b1c` — Fix Journey timeline layout and add multi-theme system  
+**Last commit:** `42a10ef` — Mobile UX, themes, journey timeline, and profile photo
 **Branch:** `main` (synced with `origin/main`)
 
 ### Tech stack (as implemented)
@@ -61,7 +61,7 @@
 | [`src/sections/*.tsx`](src/sections/) | One file per section |
 | [`src/components/Navigation.tsx`](src/components/Navigation.tsx) | Desktop + mobile nav |
 | [`src/index.css`](src/index.css) | Theme variables, card-3d, journey/skills grids |
-| [`public/hero.png`](public/hero.png) | Profile photo (also `src/assets/hero.png`) |
+| [`public/profile.png`](public/profile.png) | Profile photo for OG/static (bundled via `src/assets/profile.png`) |
 | [`src/assets/ss/`](src/assets/ss/) | 34 reference screenshots from old site (WhatsApp JPEGs) |
 | [`vite.config.ts`](vite.config.ts) | `base: '/Porfolio/'` |
 | [`.github/workflows/static.yml`](.github/workflows/static.yml) | CI build + Pages deploy |
@@ -124,9 +124,54 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 
 ---
 
-### 2026-06-24 — Agent handoff doc
+### 2026-06-24 — Mobile UX fixes (included in commit `42a10ef`)
 
-- Created this file (`AGENT_HANDOFF.md`) for future agent sessions
+- **Bottom nav scroll:** Fixed-height mobile tab bar (`--mobile-nav-bar-height: 3.25rem`), safe-area on nav only, matching `mobile-main` padding — removes extra Y-axis scroll below nav
+- **Contact cards overflow:** Restructured cards (label on top, link + copy row below), `min-w-0` / `overflow-hidden` / `minmax(0,1fr)` grid, tighter mobile padding
+- **Sticky headers clipped:** Removed negative margins on sticky headers; mobile sticky `top` clears theme toggle; z-index 40; `overflow-x: clip` on html/root/main instead of breaking sticky via body overflow
+- **Journey year labels:** Prominent pill-style year headers with accent background/border
+- **Journey color coding:** Category swatch + label in legend pills and card badges; left border accent per category on cards; `.journey-card` uses explicit `display:flex; flex-direction:column` in CSS (not Tailwind-only)
+- Build verified: `npm run build` passes
+
+---
+
+### 2026-06-24 — Mobile scroll UX & unified top chrome (included in commit `42a10ef`)
+
+- **Approach B — unified mobile top bar:** Replaced floating top-right `ThemeToggle` with sticky `mobile-top-bar` (site name + compact palette button) in `Navigation.tsx`; theme picker no longer overlaps journey cards mid-scroll
+- **Sticky section headers:** Fixed clipping — full-bleed solid `var(--nav-bg)` background on `.section-header-sticky`, sticky `top` aligned to `--mobile-top-bar-height`, z-index stack: bottom nav (40) < sticky header (44) < top bar (45) < theme dropdown (55) < modals (200)
+- **Layout insets:** `--mobile-top-bar-height` replaces old floating-toggle inset; `mobile-main` gets matching `padding-top` on mobile; section `scroll-margin-top` uses same variable
+- **Bottom nav label:** Info tab label shortened from `Tanvir Nahian` to `Info` (fixes truncation to “ir Nahian”)
+- **ThemeToggle:** Added optional `compact` prop for mobile top bar sizing
+- Build verified: `npm run build` passes
+
+---
+
+### 2026-06-24 — Mobile Y-axis scroll optimization (included in commit `42a10ef`)
+
+- **Root causes:** `min-height: 100dvh` on `body`/`#root` stacked with main chrome padding (dvh > visible svh on mobile → phantom scroll); bottom nav total height omitted 1px border vs main padding; top/bottom safe-area counted inconsistently; extra `+0.5rem` on section `scroll-margin-bottom`; generous section/card vertical padding on ≤390px viewports
+- **CSS variable model:** Unified chrome vars — `--safe-area-top/bottom`, `--mobile-top-bar-inner-height`, `--mobile-nav-bar-height`, `--mobile-chrome-border`, `--mobile-top-bar-height`, `--mobile-bottom-nav-height`, `--mobile-content-height` (svh minus both bars)
+- **Layout fixes:** Mobile `body`/`#root` `min-height: 0`; `overscroll-behavior-y: none` on `html`/`body`; explicit `height` + `box-sizing` on fixed top/bottom bars; `mobile-main` padding-top/bottom driven entirely from CSS vars (removed duplicate Tailwind `max-md:pt`)
+- **Spacing:** Tighter mobile section py (`py-8` → `sm:py-10`), sticky header `mb-6`, hero/footer/card padding reduced; `@media (max-width: 390px)` block for xs tightening
+- **Sticky headers:** Desktop/mobile split — full-bleed sticky background only on mobile (avoids desktop double-backdrop)
+- Build verified: `npm run build` passes
+
+---
+
+### 2026-06-24 — Hero profile photo with themed frame (included in commit `42a10ef`)
+
+- Replaced missing `hero.png` with professional cutout portrait (`dist/pic.png` → `src/assets/profile.png`, `public/profile.png`)
+- Added `.profile-frame` in `InfoSection`: theme-aware gradient/surface background using `--gradient-*`, `--surface-elevated`, `--accent-primary` glow — adapts to all 4 color themes × light/dark
+- Portrait uses `object-contain` with padded frame so black cutout edges blend cleanly
+- Alt text: Tanvir Nahian Swapnil
+
+---
+
+### 2026-06-24 — Journey year label visibility fix (included in commit `42a10ef`)
+
+- **Root cause:** Year labels used `color: var(--text)` on `background: var(--accent-primary)`. On Army dark (and similar themes), cream text on olive accent is ~2.3:1 contrast — selectable in DOM but visually faint/invisible. Earlier `color-mix` fallback had made text and background identical (`accent-on-accent`).
+- **Fix:** Option C — centered surface pill: `color: var(--text)` on `background: var(--surface-elevated)` with `border: 2px solid var(--accent-primary)`; `.journey-year-header` flex column centered; full-width divider below.
+- **Files:** `src/index.css` (layout + contrast); `JourneySection.tsx` unchanged (markup already correct)
+- Build verified: `npm run build` passes
 
 ---
 

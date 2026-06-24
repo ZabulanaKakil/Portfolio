@@ -33,11 +33,18 @@ export interface Achievement {
   image?: string
 }
 
+export interface ContactPhoneEntry {
+  label: string
+  href: string
+  copyValue: string
+}
+
 export interface ContactLink {
   label: string
   href: string
   copyValue: string
   external?: boolean
+  numbers?: ContactPhoneEntry[]
 }
 
 export const journeyCategoryLabels: Record<JourneyCategory, string> = {
@@ -240,7 +247,7 @@ export const portfolio = {
           name: 'English',
           rating: 4.7,
           detail:
-            'Fluent in English with excellent written and verbal communication skills. I understand most country accents and often speak in a mixed US and British accent.',
+            'Fluent in English with excellent written and verbal communication skills. I understand most countries\' accents and often speak in a mixed US and British accent.',
         },
         {
           name: 'Hindi',
@@ -268,7 +275,7 @@ export const portfolio = {
     { year: '2004', category: 'education', title: 'Elementary School' },
     { year: '2006', category: 'education', title: 'Primary School' },
     { year: '2009', category: 'education', title: 'Graduation from Primary School' },
-    { year: '2016', category: 'achievement', title: 'Higher School Certificate', detail: 'GPA 5.00' },
+    { year: '2016', category: 'achievement', title: 'Higher Secondary Certificate', detail: 'GPA 5.00' },
     { year: '2016', category: 'education', title: 'Graduated from College' },
     { year: '2016', category: 'achievement', title: 'ISSB Selection' },
     { year: '2016', category: 'job', title: 'Joined BMA' },
@@ -334,7 +341,7 @@ export const portfolio = {
       date: 'CHT Deployment',
       category: 'Service',
       description:
-        'A token momento for serving in the Chittagong Hill Tracts with HQ 97 Infantry Brigade — Southern Shield.',
+        'A token memento for serving in the Chittagong Hill Tracts with HQ 97 Infantry Brigade — Southern Shield.',
     },
     {
       title: 'Basic Commando Course 73',
@@ -380,11 +387,18 @@ export const portfolio = {
         label: 'Phone',
         href: 'tel:+8801790136979',
         copyValue: '+8801790136979',
-      },
-      {
-        label: 'Alt. Phone',
-        href: 'tel:+8801608892998',
-        copyValue: '+8801608892998',
+        numbers: [
+          {
+            label: 'Primary',
+            href: 'tel:+8801790136979',
+            copyValue: '+8801790136979',
+          },
+          {
+            label: 'Alt',
+            href: 'tel:+8801608892998',
+            copyValue: '+8801608892998',
+          },
+        ],
       },
       {
         label: 'Facebook',
@@ -439,7 +453,7 @@ export const personalSpecs: PersonalSpec[] = [
 export const navShortName = 'Tanvir Nahian'
 
 export const sections: { id: SectionId; label: string }[] = [
-  { id: 'info', label: navShortName },
+  { id: 'info', label: 'Info' },
   { id: 'journey', label: 'Journey' },
   { id: 'skills', label: 'Skills' },
   { id: 'achievements', label: 'Achievements' },
