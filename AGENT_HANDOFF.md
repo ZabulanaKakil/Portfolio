@@ -23,9 +23,8 @@
 
 ## Current state
 
-**Last updated:** 2026-06-24  
-**Last commit:** (see session log — multi-theme & layout fixes)  
-**Branch:** `main`
+**Last commit:** `daa6b1c` — Fix Journey timeline layout and add multi-theme system  
+**Branch:** `main` (synced with `origin/main`)
 
 ### Tech stack (as implemented)
 
@@ -121,6 +120,13 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 - Contacts redesigned: 2-column card grid (1 col mobile), 44px+ tap targets
 - Added 4 color themes (Google, Army, Tech, YouTube) × light/dark; `portfolio-color-theme` in localStorage
 - Expanded `ThemeToggle` to palette + mode picker; no-flash script applies system default on first visit
+- Commit: `daa6b1c` — pushed to `main`
+
+---
+
+### 2026-06-24 — Agent handoff doc
+
+- Created this file (`AGENT_HANDOFF.md`) for future agent sessions
 
 ---
 
