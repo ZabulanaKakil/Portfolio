@@ -23,7 +23,7 @@
 
 ## Current state
 
-**Last commit:** (pending) — Fix GitHub Pages serving source instead of Vite build; consolidate profile asset
+**Last commit:** `e3f4394` — Fix GitHub Pages deploy and consolidate profile image asset
 **Branch:** `main`
 
 ### GitHub Pages deploy (critical)
