@@ -23,7 +23,7 @@
 
 ## Current state
 
-**Last commit:** `42a10ef` — Mobile UX, themes, journey timeline, and profile photo
+**Last commit:** `feebee05` — Mobile UX, themes, journey timeline, and profile photo
 **Branch:** `main` (synced with `origin/main`)
 
 ### Tech stack (as implemented)
@@ -124,7 +124,7 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 
 ---
 
-### 2026-06-24 — Mobile UX fixes (included in commit `42a10ef`)
+### 2026-06-24 — Mobile UX fixes (commit `feebee05` — pushed to `main`)
 
 - **Bottom nav scroll:** Fixed-height mobile tab bar (`--mobile-nav-bar-height: 3.25rem`), safe-area on nav only, matching `mobile-main` padding — removes extra Y-axis scroll below nav
 - **Contact cards overflow:** Restructured cards (label on top, link + copy row below), `min-w-0` / `overflow-hidden` / `minmax(0,1fr)` grid, tighter mobile padding
@@ -135,7 +135,7 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 
 ---
 
-### 2026-06-24 — Mobile scroll UX & unified top chrome (included in commit `42a10ef`)
+### 2026-06-24 — Mobile scroll UX & unified top chrome (commit `feebee05` — pushed to `main`)
 
 - **Approach B — unified mobile top bar:** Replaced floating top-right `ThemeToggle` with sticky `mobile-top-bar` (site name + compact palette button) in `Navigation.tsx`; theme picker no longer overlaps journey cards mid-scroll
 - **Sticky section headers:** Fixed clipping — full-bleed solid `var(--nav-bg)` background on `.section-header-sticky`, sticky `top` aligned to `--mobile-top-bar-height`, z-index stack: bottom nav (40) < sticky header (44) < top bar (45) < theme dropdown (55) < modals (200)
@@ -146,7 +146,7 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 
 ---
 
-### 2026-06-24 — Mobile Y-axis scroll optimization (included in commit `42a10ef`)
+### 2026-06-24 — Mobile Y-axis scroll optimization (commit `feebee05` — pushed to `main`)
 
 - **Root causes:** `min-height: 100dvh` on `body`/`#root` stacked with main chrome padding (dvh > visible svh on mobile → phantom scroll); bottom nav total height omitted 1px border vs main padding; top/bottom safe-area counted inconsistently; extra `+0.5rem` on section `scroll-margin-bottom`; generous section/card vertical padding on ≤390px viewports
 - **CSS variable model:** Unified chrome vars — `--safe-area-top/bottom`, `--mobile-top-bar-inner-height`, `--mobile-nav-bar-height`, `--mobile-chrome-border`, `--mobile-top-bar-height`, `--mobile-bottom-nav-height`, `--mobile-content-height` (svh minus both bars)
@@ -157,7 +157,7 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 
 ---
 
-### 2026-06-24 — Hero profile photo with themed frame (included in commit `42a10ef`)
+### 2026-06-24 — Hero profile photo with themed frame (commit `feebee05` — pushed to `main`)
 
 - Replaced missing `hero.png` with professional cutout portrait (`dist/pic.png` → `src/assets/profile.png`, `public/profile.png`)
 - Added `.profile-frame` in `InfoSection`: theme-aware gradient/surface background using `--gradient-*`, `--surface-elevated`, `--accent-primary` glow — adapts to all 4 color themes × light/dark
@@ -166,7 +166,7 @@ $env:GIT_COMMITTER_EMAIL="ZabulanaKakil@users.noreply.github.com"
 
 ---
 
-### 2026-06-24 — Journey year label visibility fix (included in commit `42a10ef`)
+### 2026-06-24 — Journey year label visibility fix (commit `feebee05` — pushed to `main`)
 
 - **Root cause:** Year labels used `color: var(--text)` on `background: var(--accent-primary)`. On Army dark (and similar themes), cream text on olive accent is ~2.3:1 contrast — selectable in DOM but visually faint/invisible. Earlier `color-mix` fallback had made text and background identical (`accent-on-accent`).
 - **Fix:** Option C — centered surface pill: `color: var(--text)` on `background: var(--surface-elevated)` with `border: 2px solid var(--accent-primary)`; `.journey-year-header` flex column centered; full-width divider below.
