@@ -99,7 +99,7 @@ export function ContactsSection() {
         transition={{ duration: 0.45 }}
         className="space-y-6"
       >
-        <div className="card-glass hero-card flex w-full min-w-0 items-center justify-center gap-2 overflow-hidden p-3 sm:p-4 md:p-5">
+        <div className="card-glass contacts-location-card flex w-full min-w-0 items-center justify-center gap-2 overflow-hidden p-3 sm:p-4 md:p-5">
           <MapPin size={20} className="shrink-0 text-google-green" />
           <span className="text-[var(--text-muted)]">{portfolio.contacts.location}</span>
         </div>

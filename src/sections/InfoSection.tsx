@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { portfolio, personalSpecs } from '../data/portfolio'
 import { SectionWrapper } from '../components/SectionWrapper'
 import { GradientFallback } from '../components/GradientFallback'
@@ -9,12 +8,7 @@ export function InfoSection() {
     <>
       <GradientFallback />
       <SectionWrapper id="info" title="" subtitle="">
-        <motion.div
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="card-glass hero-card w-full p-4 sm:p-6 md:p-10"
-        >
+        <div className="card-glass hero-card w-full p-4 sm:p-6 md:p-10">
           <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-center md:text-center">
             <div className="profile-frame mx-auto h-40 w-40 shrink-0 md:mx-auto md:h-48 md:w-48">
               <img
@@ -75,7 +69,7 @@ export function InfoSection() {
             <p className="text-sm leading-relaxed">&ldquo;{portfolio.quote.text}&rdquo;</p>
             <footer className="mt-2 text-xs not-italic">— {portfolio.quote.author}</footer>
           </blockquote>
-        </motion.div>
+        </div>
       </SectionWrapper>
     </>
   )
