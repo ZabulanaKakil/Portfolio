@@ -69,7 +69,7 @@ const colorMap: Record<string, string> = {
   Facebook: 'text-google-blue',
   Instagram: 'text-google-red',
   LinkedIn: 'text-google-blue',
-  GitHub: 'text-[var(--text)]',
+  GitHub: 'text-theme',
   Discord: 'text-[#5865F2]',
 }
 
@@ -95,7 +95,7 @@ export function ContactsSection() {
       <div className="space-y-6">
         <div className="card-glass contacts-location-card flex w-full min-w-0 items-center justify-center gap-2 overflow-hidden p-3 sm:p-4 md:p-5">
           <MapPin size={20} className="shrink-0 text-google-green" />
-          <span className="text-[var(--text-muted)]">{portfolio.contacts.location}</span>
+          <span className="text-theme-muted">{portfolio.contacts.location}</span>
         </div>
 
         <a
@@ -123,21 +123,21 @@ export function ContactsSection() {
             if (numbers?.length) {
               return (
                 <article key={label} className="card-glass contact-card contact-card--phones min-w-0 overflow-hidden">
-                  <span className="contact-card-title block font-semibold text-[var(--text)]">{label}</span>
+                  <span className="contact-card-title block font-semibold text-theme">{label}</span>
                   <div className="contact-phone-list w-full min-w-0">
                     {numbers.map((entry) => (
                       <div key={entry.copyValue} className="contact-card-actions min-w-0">
                         <a href={entry.href} className="contact-card-link min-w-0 flex-1 overflow-hidden">
                           <span
-                            className={`contact-icon-wrap ${colorMap[label] ?? 'text-[var(--text)]'}`}
+                            className={`contact-icon-wrap ${colorMap[label] ?? 'text-theme'}`}
                           >
                             <Icon size={20} />
                           </span>
                           <span className="min-w-0 flex-1 overflow-hidden text-left">
-                            <span className="block text-xs font-medium uppercase tracking-wide text-[var(--text-muted)]">
+                            <span className="block text-xs font-medium uppercase tracking-wide text-theme-muted">
                               {entry.label}
                             </span>
-                            <span className="block truncate text-sm text-[var(--text-muted)]">
+                            <span className="block truncate text-sm text-theme-muted">
                               {entry.copyValue}
                             </span>
                           </span>
@@ -159,7 +159,7 @@ export function ContactsSection() {
 
             return (
               <article key={label} className="card-glass contact-card min-w-0 overflow-hidden">
-                <span className="block font-semibold text-[var(--text)]">{label}</span>
+                <span className="block font-semibold text-theme">{label}</span>
                 <div className="contact-card-actions min-w-0">
                   <a
                     href={href}
@@ -168,15 +168,15 @@ export function ContactsSection() {
                     className="contact-card-link min-w-0 flex-1 overflow-hidden"
                   >
                     <span
-                      className={`contact-icon-wrap ${colorMap[label] ?? 'text-[var(--text)]'}`}
+                      className={`contact-icon-wrap ${colorMap[label] ?? 'text-theme'}`}
                     >
                       <Icon size={20} />
                     </span>
                     <span className="min-w-0 flex-1 overflow-hidden text-center">
-                      <span className="block truncate text-sm text-[var(--text-muted)]">{copyValue}</span>
+                      <span className="block truncate text-sm text-theme-muted">{copyValue}</span>
                     </span>
                     {isExternal && (
-                      <ExternalLink size={16} className="shrink-0 text-[var(--text-muted)]" aria-hidden="true" />
+                      <ExternalLink size={16} className="shrink-0 text-theme-muted" aria-hidden="true" />
                     )}
                   </a>
                   <button

@@ -485,23 +485,17 @@ p {
   }
 }
 
+/* Opaque surface — Safari/iOS fails to paint text inside semi-transparent
+   card-glass layers combined with backdrop-filter (see hero-card fix 26a3a71). */
 .card-glass {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: var(--shadow-soft);
-}
-
-/* Hero holds long-form text — avoid backdrop-filter on the same layer as text
-   (Safari/iOS can fail to paint text inside blurred semi-transparent cards). */
-.card-glass.hero-card {
   position: relative;
   isolation: isolate;
   background: var(--surface);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
   color: var(--text);
 }
 
