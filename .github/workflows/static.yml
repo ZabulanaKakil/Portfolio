@@ -47,6 +47,7 @@ jobs:
       - name: Deploy to GitHub Actions Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
