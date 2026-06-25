@@ -23,7 +23,7 @@
 
 ## Current state
 
-**Last commit:** `e3f4394` — Fix GitHub Pages deploy and consolidate profile image asset
+**Last commit:** `37e37db` - Expand portfolio content, journey UI, and sharing
 **Branch:** `main`
 
 ### GitHub Pages deploy (critical)
