@@ -6,7 +6,6 @@ import { JourneySection } from './sections/JourneySection'
 import { SkillsSection } from './sections/SkillsSection'
 import { AchievementsSection } from './sections/AchievementsSection'
 import { ContactsSection } from './sections/ContactsSection'
-import { portfolio } from './data/portfolio'
 
 const sectionIds = sections.map((s) => s.id)
 
@@ -23,9 +22,6 @@ function App() {
         <SkillsSection />
         <AchievementsSection />
         <ContactsSection />
-        <footer className="mobile-footer mx-auto max-w-6xl px-4 py-6 text-center text-sm text-[var(--text-muted)] sm:px-6 md:py-8">
-          © {new Date().getFullYear()} {portfolio.name}. All rights reserved.
-        </footer>
       </main>
     </>
   )

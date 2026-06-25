@@ -2,7 +2,7 @@
   "name": "porfolio",
   "private": true,
   "version": "1.0.0",
-  "description": "This is the portfolio of Capt Nahian (retd)",
+  "description": "This is the potfolio of Capt Nahian (retd)",
   "type": "module",
   "scripts": {
     "dev": "vite",

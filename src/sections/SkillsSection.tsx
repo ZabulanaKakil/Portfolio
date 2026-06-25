@@ -21,7 +21,7 @@ function StarRating({ rating }: { rating: number }) {
           }
         />
       ))}
-      <span className="ml-1 text-xs font-semibold text-[var(--text-muted)]">{rating.toFixed(1)}</span>
+      <span className="skill-card-rating ml-1">{rating.toFixed(1)}</span>
     </div>
   )
 }
@@ -38,7 +38,7 @@ export function SkillsSection() {
       <div className="space-y-10">
         {portfolio.skillCategories.map((group) => (
           <div key={group.category}>
-            <h3 className="mb-4 text-center text-lg font-semibold text-[var(--text)]">{group.category}</h3>
+            <h3 className="skill-category-label">{group.category}</h3>
             <div className="skills-grid">
               {group.items.map((item) => (
                 <Card3D
@@ -46,9 +46,9 @@ export function SkillsSection() {
                   onClick={() => setSelected(item)}
                   className="card-glass skill-card min-h-11 gap-2 p-4"
                 >
-                  <span className="font-semibold text-[var(--text)]">{item.name}</span>
+                  <span className="skill-card-name">{item.name}</span>
                   <StarRating rating={item.rating} />
-                  <span className="mt-auto text-xs text-[var(--text-muted)]">Tap for details</span>
+                  <span className="skill-card-hint">Tap for details</span>
                 </Card3D>
               ))}
             </div>

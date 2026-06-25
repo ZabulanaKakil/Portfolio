@@ -3,11 +3,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 import { portfolio, personalSpecs, type BioHighlight, type BioParagraph } from '../data/portfolio'
 
 const bioHighlightClass: Record<BioHighlight, string> = {
-  role: 'bio-highlight--role',
   service: 'bio-highlight--service',
-  tech: 'bio-highlight--tech',
-  value: 'bio-highlight--value',
-  skill: 'bio-highlight--skill',
+  professional: 'bio-highlight--professional',
 }
 import { SectionWrapper } from '../components/SectionWrapper'
 import { GradientFallback } from '../components/GradientFallback'

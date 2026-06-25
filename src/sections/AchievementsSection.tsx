@@ -25,7 +25,7 @@ export function AchievementsSection() {
             className="card-glass flex flex-col overflow-hidden"
           >
             <div className="flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--surface-elevated)] to-transparent">
-              {item.image ? (
+              {/* {item.image ? (
                 <img
                   src={`${import.meta.env.BASE_URL}${item.image}`}
                   alt={item.title}
@@ -33,8 +33,8 @@ export function AchievementsSection() {
                   loading="lazy"
                 />
               ) : (
-                <Award size={40} className="text-google-yellow/70" />
-              )}
+              )} */}
+              <Award size={40} className="text-google-yellow/70" />
             </div>
             <div className="achievement-card-body flex flex-1 flex-col p-6">
               <span

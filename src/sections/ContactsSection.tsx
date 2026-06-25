@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { portfolio } from '../data/portfolio'
 import { SectionWrapper } from '../components/SectionWrapper'
+import { SharePortfolio } from '../components/SharePortfolio'
 
 function FacebookIcon({ size = 20, className = '' }: { size?: number; className?: string }) {
   return (
@@ -191,6 +192,13 @@ export function ContactsSection() {
               </article>
             )
           })}
+        </div>
+
+        <SharePortfolio onCopied={(label) => setCopied(label)} />
+
+        <div className="card-glass site-footer-meta">
+          <p className="site-footer-meta__line">© {new Date().getFullYear()} {portfolio.name}. All rights reserved.</p>
+          <p className="site-footer-meta__line">Last corrected at {portfolio.lastCorrectedAt}</p>
         </div>
       </div>
     </SectionWrapper>
