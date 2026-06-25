@@ -236,13 +236,13 @@ export const portfolio = {
     },
   ],
   skillHighlights: [
-    'Cybersecurity & Cyber Auditing',
-    'ICT Network Infrastructure',
-    'Surveillance Systems (CCTV)',
+    'Administration And HR',
+    'ICT specialist',
+    'Security Specialist',
     'Strategic Operations Planning',
-    'Leadership (70–500 personnel)',
+    'Leadership',
     'Microsoft Office Suite',
-    'Basic Coding (Java, C++, Web Stack)',
+    'Basic Coding',
     'Web Development & Online Portals',
   ],
   skillCategories: [
@@ -1016,7 +1016,6 @@ export const personalSpecs: PersonalSpec[] = [
   { label: 'Father\'s Name', value: portfolio.personal.parents.father },
   { label: 'Mother\'s Name', value: portfolio.personal.parents.mother },
   { label: 'Sibling', value: portfolio.personal.sibling },
-  { label: 'Birth Place', value: portfolio.personal.birthPlace },
   { label: 'Marital Status', value: portfolio.personal.maritalStatus },
   { label: 'Educational Background', value: portfolio.personal.educationalBackground },
   {
