@@ -1072,6 +1072,7 @@ export const personalSpecs: PersonalSpec[] = [
   { label: 'Father\'s Name', value: portfolio.personal.parents.father },
   { label: 'Mother\'s Name', value: portfolio.personal.parents.mother },
   { label: 'Sibling', value: portfolio.personal.sibling },
+  { label: 'Home Town', value: portfolio.personal.hometown },
   { label: 'Marital Status', value: portfolio.personal.maritalStatus },
   { label: 'Educational Background', value: portfolio.personal.educationalBackground },
   {
